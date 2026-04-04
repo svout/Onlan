@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Container from '@images/Container.png';
+import Container from '@images/container.png';
 import Title from '@/components/elements/Title';
 
 const hero = {
