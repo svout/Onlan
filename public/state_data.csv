@@ -1,0 +1,51 @@
+id,state_code,name,carriers,plans
+39,OH,Ohio,13,276
+01,AL,Alabama,4,45
+02,AK,Alaska,2,12
+04,AZ,Arizona,8,120
+05,AR,Arkansas,5,60
+06,CA,California,15,310
+08,CO,Colorado,9,150
+09,CT,Connecticut,6,85
+10,DE,Delaware,3,40
+12,FL,Florida,12,200
+13,GA,Georgia,7,95
+15,HI,Hawaii,3,30
+16,ID,Idaho,4,50
+17,IL,Illinois,10,180
+18,IN,Indiana,8,110
+19,IA,Iowa,5,70
+20,KS,Kansas,5,65
+21,KY,Kentucky,6,75
+22,LA,Louisiana,6,80
+23,ME,Maine,3,35
+24,MD,Maryland,7,90
+25,MA,Massachusetts,9,140
+26,MI,Michigan,9,130
+27,MN,Minnesota,8,115
+28,MS,Mississippi,4,55
+29,MO,Missouri,7,100
+30,MT,Montana,3,40
+31,NE,Nebraska,4,50
+32,NV,Nevada,5,75
+33,NH,New Hampshire,3,45
+34,NJ,New Jersey,10,160
+35,NM,New Mexico,4,60
+36,NY,New York,14,290
+37,NC,North Carolina,9,125
+38,ND,North Dakota,2,30
+40,OK,Oklahoma,6,85
+41,OR,Oregon,7,105
+42,PA,Pennsylvania,11,190
+44,RI,Rhode Island,3,35
+45,SC,South Carolina,6,85
+46,SD,South Dakota,2,35
+47,TN,Tennessee,8,115
+48,TX,Texas,16,350
+49,UT,Utah,5,70
+50,VT,Vermont,2,25
+51,VA,Virginia,8,110
+53,WA,Washington,9,130
+54,WV,West Virginia,4,50
+55,WI,Wisconsin,7,105
+56,WY,Wyoming,2,25

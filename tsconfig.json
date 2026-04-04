@@ -1,0 +1,39 @@
+{
+    "compilerOptions": {
+        "target": "ES2020",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": false,
+        "skipLibCheck": true,
+        "strict": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "incremental": true,
+        "plugins": [{ "name": "next" }],
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["src/*"],
+            "@icons/*": ["src/assets/icons/*"],
+            "@images/*": ["src/assets/images/*"],
+            "@components": ["src/components"],
+            "@components/*": ["src/components/*"],
+            "@elements/*": ["src/components/elements/*"],
+            "@widgets/*": ["src/components/widgets/*"],
+            "@containers/*": ["src/components/containers/*"],
+            "@pages/*": ["src/pages/*"],
+            "@routes/*": ["src/routes/*"],
+            "@services/*": ["src/services/*"],
+            "@store/*": ["src/store/*"],
+            "@utils/*": ["src/utils/*"],
+            "react-router": ["src/lib/router"],
+            "react-router-dom": ["src/lib/router"]
+        }
+    },
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+    "exclude": ["node_modules"]
+}

@@ -1,0 +1,65 @@
+/* Layout & Container Classes */
+.max-w-\[1140px\] {
+    max-width: 1140px;
+}
+
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.relative {
+    position: relative;
+}
+
+.aspect-\[1140\/705\] {
+    aspect-ratio: 1140 / 705;
+}
+
+/* Map Container */
+#my-map {
+    width: 100%;
+    height: 100%;
+    background-color: #F7F8FB; /* Light grey background to match site */
+    border-radius: 8px; /* Optional: adds subtle rounding */
+}
+
+/* Tooltip Styling (Matches your Dark Image) */
+.map-tooltip {
+    display: none;
+    position: absolute;
+    background-color: #4B4B57; /* Dark Grey */
+    color: #FFFFFF;
+    padding: 16px;
+    border-radius: 8px;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 14px;
+    pointer-events: none;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    min-width: 200px;
+    line-height: 1.5;
+}
+
+.map-tooltip h3 {
+    margin: 0 0 12px 0;
+    font-size: 18px;
+    font-weight: 400; /* Lighter weight for the title */
+}
+
+.map-tooltip .row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    font-size: 14px;
+    color: #E5E7EB; /* Slightly off-white for data labels */
+}
+
+.map-tooltip .row span:last-child {
+    font-weight: 600;
+    color: #FFFFFF;
+}

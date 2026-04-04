@@ -1,0 +1,824 @@
+@import 'tailwindcss';
+@plugin 'tailwindcss-react-aria-components';
+
+/* Canonical palette — use only these (also exposed as Tailwind `onlan-*` via @theme) */
+:root {
+    --onlan-lime: #d5e82d;
+    --onlan-lime-dark: #bacf02;
+    --onlan-blue: #2c358c;
+    --onlan-lavender: #cfd2f4;
+    --onlan-black: #000000;
+    --onlan-white: #ffffff;
+}
+
+@custom-variant group-checked {
+    &:is(:where(.group):has(input:checked) *) {
+        @slot;
+    }
+}
+
+@plugin "daisyui" {
+    themes: light --default;
+    root: ':root';
+    logs: true;
+}
+
+@plugin "daisyui/theme" {
+    name: 'light';
+    default: true;
+    prefersdark: false;
+    color-scheme: 'light';
+
+    --color-base-100: var(--onlan-white);
+    --color-base-200: var(--onlan-white);
+    --color-base-300: var(--onlan-lavender);
+    --color-base-content: var(--onlan-black);
+
+    --color-primary: var(--onlan-blue);
+    --color-primary-content: var(--onlan-white);
+
+    --color-secondary: var(--onlan-lavender);
+    --color-secondary-content: var(--onlan-black);
+
+    --color-accent: var(--onlan-lime);
+    --color-accent-content: var(--onlan-black);
+
+    --color-neutral: var(--onlan-lavender);
+    --color-neutral-content: var(--onlan-black);
+
+    --color-info: var(--onlan-lavender);
+    --color-info-content: var(--onlan-black);
+
+    --color-success: var(--onlan-lime);
+    --color-success-content: var(--onlan-black);
+
+    --color-warning: var(--onlan-lime-dark);
+    --color-warning-content: var(--onlan-black);
+
+    --color-error: var(--onlan-blue);
+    --color-error-content: var(--onlan-white);
+
+    --radius-selector: 0.5rem;
+    --radius-field: 0.5rem;
+    --radius-box: 1rem;
+
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+
+    --depth: 1;
+    --noise: 0;
+}
+
+@theme {
+    /* Only palette colors (Tailwind: bg-onlan-lime, text-onlan-blue, …) */
+    --color-onlan-lime: var(--onlan-lime);
+    --color-onlan-lime-dark: var(--onlan-lime-dark);
+    --color-onlan-blue: var(--onlan-blue);
+    --color-onlan-lavender: var(--onlan-lavender);
+    --color-onlan-black: var(--onlan-black);
+    --color-onlan-white: var(--onlan-white);
+
+    /* Fonts */
+    /* Use Albert Sans as the primary sans-serif font for Tailwind `font-sans` */
+    --font-sans: var(--font-albert-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-albert: var(--font-albert-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    --text-sm: 0.875rem;
+    --text-sm--line-height: 120%;
+    --text-base: 1rem;
+    --text-base--line-height: 120%;
+    --text-lg: 1.125rem;
+    --text-lg--line-height: 120%;
+    --text-xl: 1.25rem;
+    --text-xl--line-height: 120%;
+    --text-2xl: 1.5rem;
+    --text-2xl--line-height: 120%;
+    --text-3xl: 1.75rem;
+    --text-3xl--line-height: 120%;
+    --text-4xl: 2rem;
+    --text-4xl--line-height: 120%;
+    --text-5xl: 2.5rem;
+    --text-5xl--line-height: 120%;
+    --text-6xl: 3.75rem;
+    --text-6xl--line-height: 110%;
+
+    /* spacing */
+    --spacing-18: 4.5rem;
+    --spacing-22_5: 5.625rem;
+    --spacing-25: 6.25rem;
+    --spacing-30: 7.5rem;
+    --spacing-50: 12.5rem;
+    --spacing-57: 14.25rem;
+    --spacing-68: 17rem;
+    --spacing-87_5: 21.875rem;
+    --spacing-93: 23.25rem;
+    --spacing-100: 25rem;
+
+    /* shadow */
+    --shadow-card: 2px 2px 7px 0px rgba(0, 0, 0, 0.05), 0px 0px 5px 0px rgba(0, 0, 0, 0.09);
+    --shadow-chart: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
+    --shadow-navbar: 0 1px 6px 0 rgb(0 0 0 / 0.16);
+    --shadow-menu: 2px 0 4px 0 rgb(0 0 0 / 0.08);
+    --shadow-sm: 0 1px 4px 0 rgb(0 0 0 / 0.12);
+    --shadow-api-logo:
+        0px 2px 5px 0 rgba(0, 0, 0, 0.05), 0px 8px 8px 0 rgba(0, 0, 0, 0.04), 0px 18px 11px 0 rgba(0, 0, 0, 0.03),
+        0px 31px 13px 0 rgba(0, 0, 0, 0.01);
+    --shadow-api-schema:
+        1px 1px 2px 0 rgba(0, 0, 0, 0.05), 3px 3px 4px 0 rgba(0, 0, 0, 0.04), 8px 6px 6px 0 rgba(0, 0, 0, 0.03),
+        13px 11px 7px 0 rgba(0, 0, 0, 0.01);
+
+    --shadow-actions: 4px 4px 8px 0 rgba(0, 0, 0, 0.25);
+    /* screens */
+    --breakpoint-xs: 24.375rem;
+    --breakpoint-2xl: 90rem;
+    --breakpoint-3xl: 120rem;
+
+    --brand-back-color: var(--onlan-white);
+
+    --animate-progress: infiniteProgress 1.5s infinite linear;
+
+    @keyframes infiniteProgress {
+        0% {
+            transform: translateX(0) scaleX(0);
+        }
+        40% {
+            transform: translateX(0) scaleX(0.4);
+        }
+        100% {
+            transform: translateX(100%) scaleX(0.5);
+        }
+    }
+}
+
+@layer base {
+    body {
+        font-family: var(--font-albert);
+    }
+
+    /* Heading scale (max): h1 60px, h2 30px, h3 24px, h4 20px, h5 18px, h6 16px */
+    h1 {
+        font-size: clamp(2rem, 4vw + 1rem, 60px);
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+    }
+
+    h2 {
+        font-size: clamp(1.375rem, 2.5vw + 0.5rem, 30px);
+        line-height: 1.15;
+        letter-spacing: -0.015em;
+    }
+
+    h3 {
+        font-size: clamp(1.125rem, 2vw + 0.25rem, 24px);
+        line-height: 1.2;
+    }
+
+    h4 {
+        font-size: clamp(1.0625rem, 1.5vw + 0.25rem, 20px);
+        line-height: 1.25;
+    }
+
+    h5 {
+        font-size: 18px;
+        line-height: 1.3;
+    }
+
+    h6 {
+        font-size: 16px;
+        line-height: 1.35;
+    }
+
+    p {
+        @apply text-sm md:text-base;
+    }
+
+    .container {
+        @apply px-4 md:px-8 lg:px-10;
+    }
+}
+
+@utility navbar {
+    @apply h-20 w-full bg-base-100 px-4 py-5 shadow-navbar lg:px-8;
+}
+
+@utility btn {
+    @apply font-normal hover:shadow-sm;
+
+    &.btn-link {
+        @apply underline-offset-2;
+        
+        &:hover {
+            box-shadow: none !important;
+        }
+    }
+
+    &.btn-xs {
+        --size: calc(var(--size-field, 0.25rem) * 6);
+    }
+
+    &.btn-sm {
+        --fontsize: 1rem;
+        --btn-p: 0.5rem;
+        --size: calc(var(--size-field, 0.25rem) * 11);
+    }
+
+    &.btn-lg {
+        --fontsize: 1rem;
+        --btn-p: 1rem;
+        --size: calc(var(--size-field, 0.25rem) * 12);
+    }
+
+    &.btn-xl {
+        --size: calc(var(--size-field, 0.25rem) * 15);
+    }
+}
+
+@utility btn-link {
+    @apply border border-transparent rounded p-0;
+    
+    &:hover {
+        background: transparent;
+        border-color: transparent;
+        box-shadow: none;
+    }
+    
+    &:active {
+        background: transparent;
+        border-color: transparent;
+        box-shadow: none;
+    }
+}
+
+@utility btn-primary {
+    &:not(.btn-soft, .btn-outline) {
+        @apply border border-transparent bg-onlan-blue shadow-none rounded-lg disabled:!bg-onlan-lavender disabled:bg-none disabled:!text-onlan-blue;
+        
+        &:hover {
+            box-shadow: 0px 2px 4px 0px #00000029;
+            background: var(--onlan-black);
+        }
+        
+        &:active {
+            background: var(--onlan-black);
+        }
+    }
+}
+
+@utility btn-blue {
+    &:not(.btn-soft, .btn-outline) {
+        @apply border border-transparent bg-onlan-lime shadow-none hover:!shadow-[0px_2px_4px_0px_rgba(0,0,0,0.16)] active:bg-onlan-blue disabled:!bg-onlan-lavender disabled:bg-none disabled:!text-onlan-blue;
+    }
+}
+
+@utility btn-white {
+    &:not(.btn-soft, .btn-outline) {
+        @apply border border-onlan-blue bg-onlan-white text-onlan-lime shadow-none hover:bg-onlan-lavender hover:text-onlan-blue hover:!shadow-[0px_2px_4px_0px_rgba(0,0,0,0.16)] active:border-onlan-black active:bg-onlan-lavender disabled:border-onlan-lavender disabled:!bg-onlan-lavender disabled:!text-onlan-blue;
+    }
+}
+
+@utility btn-soft {
+    &.btn-primary {
+        @apply border-none bg-transparent text-onlan-blue shadow-none hover:bg-onlan-white hover:text-onlan-blue active:!border active:border-solid active:border-onlan-lavender active:bg-onlan-white active:text-onlan-blue disabled:bg-transparent disabled:text-onlan-blue;
+    }
+}
+
+@utility btn-outline {
+    &.btn-neutral {
+        @apply border text-base-content shadow-none hover:bg-onlan-white hover:shadow-[0px_1px_4px_0px_rgba(0,0,0,0.16)] disabled:border-neutral disabled:bg-onlan-white disabled:text-onlan-blue;
+    }
+
+    &.btn-primary:not(.btn-soft) {
+        @apply bg-onlan-lavender hover:bg-onlan-lavender hover:border-onlan-blue hover:text-onlan-blue hover:shadow-[0px_2px_4px_0px_#00000029] disabled:border-onlan-lavender disabled:bg-onlan-white disabled:text-onlan-lavender;
+    }
+
+    &.btn-error {
+        @apply !bg-base-100 hover:!bg-error hover:text-base-100;
+    }
+}
+
+@utility steps {
+    .step {
+        --step-bg: var(--color-base-100);
+        --step-fg: var(--color-secondary);
+    }
+}
+@utility step {
+    @apply text-sm/4 text-onlan-blue after:!mb-0.5 max-md:!min-w-full lg:text-sm;
+
+    &:before {
+        @apply !h-px !text-onlan-blue;
+    }
+
+    &:after {
+        @apply z-30 !size-8 !border-onlan-lavender md:!size-9;
+    }
+
+    &.step-primary {
+        @apply text-base-content;
+    }
+}
+
+@utility step-active {
+    @apply text-base-content;
+
+    &:after {
+        @apply border !border-onlan-blue !bg-onlan-white !text-onlan-lime outline-2 !outline-onlan-lavender;
+    }
+}
+
+@utility step-primary {
+    &:after {
+        @apply bg-primary;
+    }
+}
+
+@utility tooltip-content {
+    @apply max-w-40 max-sm:!right-0 max-sm:!-translate-x-1/3 md:max-w-xs;
+}
+
+@utility fieldset {
+    @apply p-0 text-base-content;
+}
+
+@utility fieldset-legend {
+    @apply !p-0 text-lg text-onlan-black md:text-xl;
+}
+
+@utility fieldset-description {
+    @apply mt-2 text-onlan-blue;
+}
+
+@utility label {
+    @apply mb-2 text-base text-wrap !text-onlan-black;
+    &.required {
+        @apply gap-0 after:content-['*'];
+    }
+
+    &.label-radio {
+        @apply text-sm;
+    }
+
+    &.label-lg {
+        @apply text-lg;
+    }
+    &.label-xl {
+        @apply text-xl;
+    }
+}
+
+@utility radio {
+    &.radio-xs {
+        @apply box-border;
+
+        &:before {
+            @apply m-auto my-px !size-2;
+        }
+    }
+    &.radio-sm {
+        @apply box-border;
+
+        &:before {
+            @apply m-auto !size-3;
+        }
+    }
+}
+
+@utility textarea {
+    @apply w-full resize-none shadow-none !outline-none focus-within:border-neutral focus-within:bg-onlan-white focus-within:shadow-none hover:border-neutral hover:bg-onlan-lavender hover:shadow-[0px_1px_4px_0px_rgba(0,0,0,0.12)] focus:border-neutral focus:bg-onlan-white focus:shadow-none disabled:border-neutral disabled:!bg-onlan-lavender; /* чтобы запретить растягивание, как у input */
+
+    /* Если нужна поддержка placeholder-стиля, как у input */
+    &::placeholder {
+        @apply text-onlan-blue;
+    }
+}
+
+@utility input {
+    @apply w-full shadow-none !outline-none focus-within:border-neutral focus-within:bg-onlan-white focus-within:shadow-none hover:border-neutral hover:bg-onlan-lavender hover:shadow-[0px_1px_4px_0px_rgba(0,0,0,0.12)] focus:border-neutral focus:bg-onlan-white focus:shadow-none disabled:border-neutral disabled:!bg-onlan-lavender;
+
+    &:-webkit-autofill,
+    & input:-webkit-autofill {
+        -webkit-text-fill-color: currentColor !important;
+        -webkit-background-clip: text;
+    }
+
+    &.input-disabled {
+        @apply !bg-onlan-lavender;
+    }
+    &.input-md {
+        @apply text-base;
+    }
+    [type='date'] {
+        &::-webkit-inner-spin-button {
+        }
+
+        &::-webkit-calendar-picker-indicator {
+            @apply size-5 p-0.5 text-base-content outline-none;
+            background: url(../assets/icons/calendar.svg) no-repeat center;
+        }
+
+        &::-webkit-datetime-edit-fields-wrapper {
+            @apply text-base-content placeholder:text-onlan-blue;
+        }
+
+        &::-webkit-datetime-edit-text {
+            @apply px-0.5 text-base-content;
+        }
+
+        &::-webkit-datetime-edit-day-field {
+            @apply text-base-content uppercase;
+        }
+
+        &::-webkit-datetime-edit-month-field {
+            @apply text-base-content uppercase;
+        }
+
+        &::-webkit-datetime-edit-year-field {
+            @apply text-base-content uppercase;
+        }
+
+        &.has-value {
+            &:user-invalid {
+                &::-webkit-datetime-edit-text,
+                &::-webkit-datetime-edit-day-field,
+                &::-webkit-datetime-edit-month-field,
+                &::-webkit-datetime-edit-year-field {
+                    @apply !text-onlan-blue;
+                }
+            }
+
+            &::-webkit-datetime-edit-text {
+                @apply !text-base-content;
+            }
+
+            &::-webkit-datetime-edit-day-field {
+                @apply !text-base-content;
+            }
+
+            &::-webkit-datetime-edit-month-field {
+                @apply !text-base-content;
+            }
+
+            &::-webkit-datetime-edit-year-field {
+                @apply !text-base-content;
+            }
+        }
+    }
+}
+
+@utility select {
+    @apply w-full !appearance-none !outline-none;
+
+    & option {
+        @apply bg-onlan-white text-base-content hover:bg-onlan-lavender has-disabled:cursor-not-allowed has-disabled:bg-onlan-white has-disabled:text-onlan-blue;
+    }
+}
+
+@utility checkbox {
+    @apply rounded-xs checked:bg-onlan-blue checked:text-onlan-white disabled:border-onlan-lavender;
+
+    &.checkbox-xs {
+        width: calc(var(--spacing) * 3.5) !important;
+        height: calc(var(--spacing) * 3.5) !important;
+    }
+}
+
+@utility badge {
+    @apply rounded;
+
+    &.badge-neutral {
+        @apply border border-onlan-lavender bg-onlan-lavender text-base-content;
+    }
+
+    &.badge-secondary {
+        @apply !border-onlan-lavender;
+    }
+
+    &.badge-xs {
+        @apply p-1;
+    }
+
+    &.badge-sm {
+        @apply px-2 py-1;
+    }
+
+    &.badge-md {
+        @apply p-2;
+    }
+
+    &.badge-lg {
+        @apply rounded-lg px-3 py-2;
+    }
+
+    &.badge-xl {
+        @apply rounded-lg px-3 py-2.5;
+    }
+}
+
+@utility dropdown {
+    & .dropdown-arrow {
+        @apply ms-auto rotate-180 text-base-content transition-transform duration-300;
+    }
+
+    &:not(details, .dropdown-open, .dropdown-hover:hover) {
+        .dropdown-arrow {
+            @apply rotate-0 text-onlan-blue;
+        }
+    }
+}
+
+@utility dropdown-content {
+    @apply rounded-lg bg-base-100;
+
+    & .dropdown-item {
+        @apply bg-onlan-white text-base-content hover:bg-onlan-lavender has-disabled:cursor-not-allowed has-disabled:bg-onlan-white has-disabled:text-onlan-blue has-[checked]:bg-onlan-blue;
+    }
+}
+
+@utility link {
+    @apply underline-offset-2;
+}
+
+@utility modal {
+    @apply p-4;
+
+    & .modal-box {
+        @apply rounded-3xl p-6 md:p-10;
+    }
+}
+
+@utility tabs {
+    &.tabs-xs {
+    }
+
+    &.tabs-sm {
+    }
+
+    &.tabs-md {
+    }
+
+    &.tabs-lg {
+        @apply !p-3;
+    }
+
+    &.tabs-xl {
+        @apply !p-3;
+    }
+
+    &.tabs-box {
+        @apply h-full border border-onlan-lavender bg-onlan-lavender !p-3;
+        & .tab {
+            span {
+                @apply ms-1 rounded bg-onlan-blue px-2 py-1 text-onlan-white;
+            }
+            &.tab-active {
+                @apply rounded-lg !bg-onlan-blue !text-onlan-white;
+
+                span {
+                    @apply rounded border border-onlan-lavender bg-onlan-white px-2 py-1 text-onlan-blue;
+                }
+            }
+        }
+    }
+
+    &.tabs-border {
+        & .tab {
+            @apply rounded-t-md rounded-b-none before:left-0 before:h-px before:w-full before:rounded-none before:border-transparent;
+            &.tab-active {
+                @apply rounded-t-md rounded-b-none bg-onlan-white before:border-t before:text-onlan-black;
+            }
+        }
+    }
+}
+
+@utility tab {
+    @apply text-base !text-base-content;
+}
+
+@utility list-dash {
+    @apply list-none;
+    & > li:before {
+        content: '- ';
+        text-indent: -5px;
+    }
+}
+@utility alert {
+    @apply gap-2 rounded-lg;
+}
+/*.pika-single {*/
+/*    .pika-row {*/
+
+/*    }*/
+
+/*    .pika-day {*/
+/*        @apply rounded-lg text-base-content hover:bg-secondary hover:text-secondary-content;*/
+/*    }*/
+
+/*    .is-today .pika-day {*/
+/*        @apply border border-primary bg-base-100 text-base-content;*/
+/*    }*/
+
+/*    .is-selected .pika-day {*/
+/*        @apply bg-primary text-primary-content;*/
+/*    }*/
+/*}*/
+
+.my-circle {
+    cx: var(--circle-cx, 50); /* Default to 50 if --circle-cx is not set */
+    cy: var(--circle-cy, 50);
+    r: calc(var(--circle-r, 76));
+}
+
+.progress-ring {
+    transform: rotate(-90deg);
+    filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.2));
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--onlan-blue) 0%, var(--onlan-lime-dark) 100%);
+    border-radius: 4px;
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 10px color-mix(in srgb, var(--onlan-blue) 40%, transparent);
+}
+
+.floating-circle {
+    animation: float 10s infinite linear;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) scale(1);
+        opacity: 0;
+    }
+}
+
+.logo svg {
+    width: 100%;
+}
+
+.position-unset {
+    position: unset;
+}
+
+/* Print Styles - минимальные изменения для сохранения оригинального вида */
+@media print {
+    /* Принудительная печать цветов и фонов */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* Скрыть ненужные элементы */
+    header,
+    nav,
+    button,
+    .btn,
+    [role="button"],
+    [role="tab"],
+    .share-dropdown-custom,
+    .a2a_kit,
+    .dropdown-content,
+    .modal,
+    .modal-backdrop,
+    [class*="Filter"],
+    [class*="SortBy"],
+    [class*="CheckBoxToggle"],
+    [class*="ShareDropdown"],
+    select[class*="page-size"],
+    [class*="pagination"],
+    [class*="page-controls"],
+    .loading-animation,
+    footer {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    /* Преобразовать sticky/fixed в static для печати */
+    [class*="sticky"],
+    [class*="fixed"] {
+        position: static !important;
+    }
+
+    /* Убрать тени для печати */
+    * {
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    /* Убрать фоновые изображения */
+    * {
+        background-image: none !important;
+    }
+
+    /* Сделать h1 черным */
+    h1 {
+        color: #000000 !important;
+    }
+
+    /* Настройка страницы */
+    @page {
+        size: A4;
+        margin: 1.5cm;
+    }
+
+    /* Предотвратить разрывы внутри важных элементов */
+    .plan-card,
+    .plan-summary-card,
+    .card {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    /* Карточки на всю ширину */
+    /* Контейнер с карточками планов */
+    section[class*="px-5"][class*="pb-12"] > div[class*="flex-col"][class*="gap-4"],
+    section > div[class*="flex-col"][class*="gap-4"] {
+        display: block !important;
+        column-count: 1 !important;
+        column-gap: 0 !important;
+    }
+
+    /* Убедиться, что карточки на всю ширину и правильно отображаются */
+    .plan-card,
+    article[class*="rounded-2xl"][class*="border"][class*="bg-white"] {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        margin-bottom: 1rem !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Сделать цену monthly premium белой при печати */
+    /* Цена внутри MonthlyPremium компонента */
+    .plan-card span.text-onlan-blue,
+    .plan-summary-card span.text-onlan-blue,
+    span.text-onlan-blue[class*="text-base"],
+    span.text-onlan-blue[class*="text-lg"] {
+        color: white !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* Полноширинные маркетинговые секции при печати */
+    section[class*="pt-15"][class*="pb-15"],
+    section[class*="overflow-hidden"][class*="bg-cover"][class*="pt-15"],
+    section[style*="backgroundImage"][class*="pt-15"] {
+        page-break-before: always !important;
+        break-before: page !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+    }
+
+    /* Центрировать контейнер внутри таких секций */
+    section[class*="pt-15"] > div,
+    section[class*="overflow-hidden"][class*="bg-cover"] > div,
+    section[style*="backgroundImage"] > div {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    /* Центрировать типографику внутри контейнера */
+    section[class*="pt-15"] h1,
+    section[class*="pt-15"] h2,
+    section[class*="pt-15"] h3,
+    section[class*="pt-15"] h4,
+    section[class*="pt-15"] p,
+    section[class*="pt-15"] span,
+    section[class*="pt-15"] div[class*="flex"] {
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+}
