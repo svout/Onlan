@@ -1,5 +1,3 @@
-# Predictable Benefits Public Website
-
 Проект переведен на `Next.js` с режимом статической сборки (`output: 'export'`).
 
 ## Команды
