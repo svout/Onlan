@@ -55,6 +55,15 @@ export const HOW_IT_WORKS_SERVICES: HowItWorksServiceItem[] = [
             'Класифікація ТН ВЕД, підготовка пакета документів і взаємодія з митницею, щоб мінімізувати зупинки та додаткові платежі.',
         iconId: 'customs',
     },
+    {
+        number: '07',
+        slug: 'customs',
+        tagLabel: 'Мультимодальні перевезення',
+        title: 'Мультимодальні перевезення',
+        description:
+            'Комбінуємо авто, море, авіа та залізницю — будуємо оптимальний маршрут під строки, бюджет і тип вантажу',
+        iconId: 'customs',
+    },
 ];
 
 export function getServiceBySlug(slug: string): HowItWorksServiceItem | undefined {

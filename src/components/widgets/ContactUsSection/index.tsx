@@ -61,7 +61,7 @@ export function ContactUsSection() {
                                 id="contact-section-name"
                                 name="name"
                                 type="text"
-                                label="Name"
+                                label="Ім’я"
                                 labelClassName="!text-onlan-white"
                                 placeholder="Ваше Ім'я"
                                 value={name}
@@ -74,7 +74,7 @@ export function ContactUsSection() {
                                 id="contact-section-phone"
                                 name="phone"
                                 type="tel"
-                                label="Phone number"
+                                label="Телефон"
                                 labelClassName="!text-onlan-white"
                                 placeholder="Номер телефону"
                                 value={phone}

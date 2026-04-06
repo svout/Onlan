@@ -10,15 +10,27 @@ const REVIEWS: {
     imageSrc: string;
 }[] = [
     {
-        text: 'Співпрацюємо з Онлан більше рік, завжди завчасно прораховані маршрути, чіткі вказівки стосовно всіх етапів перевезення, супровід, і найголовніше — своєчасна оплата.',
-        name: 'Ігор',
-        role: 'перевізник (Луцьк)',
+        text: 'Ми шукали логістичного партнера, який розуміє наші внутрішні процеси та може адаптуватися під них.З OnLan ми це отримали: перевезення проходять чітко, а комунікація — на високому рівні.',
+        name: 'Олександр',
+        role: 'CEO виробничої компанії (Київ)',
         imageSrc: 'https://picsum.photos/seed/onlan-review-igor/160/160',
     },
     {
-        text: 'Працюємо з командою ONLAN понад пів року: прозора комунікація, жодних зайвих затримок на кордоні, документація завжди в порядку. Рекомендуємо як надійного партнера.',
-        name: 'Олена',
-        role: 'логіст (Варшава)',
+        text: 'Працюємо з OnLan понад два роки. Логісти завжди на зв’язку, оперативно реагують на зміни та знаходять рішення навіть у складних ситуаціях.',
+        name: 'Іванна',
+        role: 'Керівниця відділу логістики (Одеса)',
+        imageSrc: 'https://picsum.photos/seed/onlan-review-olena/160/160',
+    },
+    {
+        text: 'Партнер, який забезпечує своєчасну доставку як для комплектуючих, так і для готової продукції. Надійне рішення для нашого бізнесу.',
+        name: 'Марина',
+        role: 'Керівниця логістичного відділу (Київ)',
+        imageSrc: 'https://picsum.photos/seed/onlan-review-olena/160/160',
+    },
+    {
+        text: 'Співпрацюємо більше року — маршрути чітко сплановані, є прозорість на всіх етапах і якісний супровід. Усе працює стабільно.',
+        name: 'Ігор',
+        role: 'Перевізник (Луцьк)',
         imageSrc: 'https://picsum.photos/seed/onlan-review-olena/160/160',
     },
 ];
@@ -58,7 +70,7 @@ export function Reviews() {
     }, [total]);
 
     return (
-        <section className="relative isolate w-full overflow-visible py-10 md:py-14" aria-labelledby="reviews-heading">
+        <section className="relative isolate w-full overflow-visible py-10 md:py-14 lg:py-20" aria-labelledby="reviews-heading">
             <div
                 className="pointer-events-none absolute inset-0 z-0 flex select-none items-end justify-start"
                 aria-hidden

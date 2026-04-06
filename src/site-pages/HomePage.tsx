@@ -6,6 +6,7 @@ export default function HomePage() {
     return (
         <>
             <Containers.Section el={<Widgets.HeroSection />} />
+            <Containers.Section el={<Widgets.AntiPainSection />} />
             <Containers.Section el={<Widgets.WhyChooseUsSection />} />
             <Containers.Section el={<Widgets.ServicesHowItWorksSection />} />
             <Containers.Section el={<Widgets.AboutUsNew />} />

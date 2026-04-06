@@ -1,6 +1,23 @@
 import { Link } from 'react-router';
+import { FaEnvelope, FaInstagram, FaLinkedinIn, FaPhone } from 'react-icons/fa6';
 import Description from '@/components/elements/Description';
 import { LogoFooter } from '@/assets/icons/LogoFooter';
+
+/** Оновіть на реальні профілі компанії */
+const SOCIAL_HREF = {
+    instagram: 'https://www.instagram.com/',
+    linkedin: 'https://www.linkedin.com/',
+} as const;
+
+const CONTACT = {
+    location: 'Вінниця, Україна',
+    email: 'maryna_onopenko@onlan.com.ua',
+    phoneDisplay: '+380 98 659 16 71',
+    phoneTel: '+380986591671',
+} as const;
+
+const socialIconClass =
+    'inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-onlan-lime text-onlan-blue transition-colors hover:bg-onlan-lime-dark hover:text-onlan-blue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-onlan-white';
 
 const linkClass =
     'text-onlan-white transition-colors hover:text-onlan-lime focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-onlan-lime';
@@ -11,7 +28,9 @@ export const Footer = () => {
     return (
         <footer className="mt-auto w-full overflow-hidden bg-onlan-blue">
             <div className="container mx-auto px-4 py-12 md:py-16 lg:py-20">
-                <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
+                <div
+                    className={`flex flex-col lg:flex-row lg:items-start lg:justify-between gap-12`}
+                >
                     <div className="max-w-md shrink-0">
                         <Link
                             to="/"
@@ -34,9 +53,33 @@ export const Footer = () => {
                             type="small"
                             className="mt-6 w-full max-w-full text-onlan-white/90"
                         />
+
+
+                        <div className="mt-4 flex items-center gap-4">
+                            <a
+                                href={SOCIAL_HREF.instagram}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={socialIconClass}
+                                aria-label="ONLAN у Instagram"
+                            >
+                                <FaInstagram className="size-4.5" aria-hidden />
+                            </a>
+                            <a
+                                href={SOCIAL_HREF.linkedin}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={socialIconClass}
+                                aria-label="ONLAN у LinkedIn"
+                            >
+                                <FaLinkedinIn className="size-4.5" aria-hidden />
+                            </a>
+                        </div>
                     </div>
 
-                    <div className="grid w-full grid-cols-2 gap-10 sm:max-w-xl lg:max-w-2xl lg:flex-1 lg:justify-end lg:gap-12">
+                    <div
+                        className={`grid w-full grid-cols-1 sm:max-w-xl sm:grid-cols-2 lg:max-w-none lg:flex-1 lg:grid-cols-3 gap-12`}
+                    >
                         <nav className="min-w-0">
                             <h3 className="text-lg font-semibold text-onlan-white md:text-xl">Навігація</h3>
                             <div className="mt-4 flex flex-col gap-3 text-sm font-normal md:text-base">
@@ -69,10 +112,31 @@ export const Footer = () => {
                                 </Link>
                             </div>
                         </nav>
+
+                        <address className="min-w-0 not-italic sm:col-span-2 lg:col-span-1">
+                            <h4 className="text-lg font-semibold text-onlan-white md:text-xl">Контакти</h4>
+                            <div className="mt-4 flex flex-col gap-3 text-sm font-normal text-onlan-white/90 md:text-base">
+                                <p>{CONTACT.location}</p>
+                                <a
+                                    href={`mailto:${CONTACT.email}`}
+                                    className={`${linkClass} inline-flex items-start gap-2`}
+                                >
+                                    <FaEnvelope className="mt-0.5 size-4 shrink-0 text-onlan-lime" aria-hidden />
+                                    <span>{CONTACT.email}</span>
+                                </a>
+                                <a
+                                    href={`tel:${CONTACT.phoneTel}`}
+                                    className={`${linkClass} inline-flex items-start gap-2`}
+                                >
+                                    <FaPhone className="mt-0.5 size-4 shrink-0 text-onlan-lime" aria-hidden />
+                                    <span>{CONTACT.phoneDisplay}</span>
+                                </a>
+                            </div>
+                        </address>
                     </div>
                 </div>
 
-                <div className="mt-10 h-px w-full bg-white/20 md:mt-12" />
+                <div className="mt-8 h-px w-full bg-white/20 md:mt-8" />
 
                 <div className="mt-8 flex flex-col gap-4 text-sm leading-snug text-white/70 md:mt-10 md:flex-row md:items-center md:justify-between md:text-base">
                     <p className="text-center md:text-left">

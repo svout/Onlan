@@ -53,7 +53,7 @@ function parsePathname(href: string): string | null {
     }
 
     try {
-        return new URL(href, 'https://predictablebenefits.local').pathname;
+        return new URL(href, 'https://onlan.com').pathname;
     } catch {
         return href;
     }
@@ -208,14 +208,14 @@ export function useParams<
         const params: Record<string, string> = {};
 
         const zipMatch = pathname.match(
-            /^\/shop-individual-health-insurance-plans\/zip\/([^/]+)\/?$/
+            /^\/\/zip\/([^/]+)\/?$/
         );
         if (zipMatch?.[1]) {
             params.zipCode = decodeURIComponent(zipMatch[1]);
         }
 
         const stateCountyMatch = pathname.match(
-            /^\/shop-individual-health-insurance-plans\/state\/([^/]+)(?:\/county\/([^/]+))?\/?$/
+            /^\/\/state\/([^/]+)(?:\/county\/([^/]+))?\/?$/
         );
         if (stateCountyMatch?.[1]) {
             params.state = decodeURIComponent(stateCountyMatch[1]);
