@@ -58,11 +58,7 @@ export function AntiPainSection() {
             <div
                 className="pointer-events-none absolute inset-0 opacity-[0.35]"
                 aria-hidden
-                style={{
-                    backgroundImage: `linear-gradient(to right, var(--onlan-lavender) 1px, transparent 1px),
-            linear-gradient(to bottom, var(--onlan-lavender) 1px, transparent 1px)`,
-                    backgroundSize: '48px 48px',
-                }}
+                
             />
             <div
                 className="pointer-events-none absolute -right-[20%] -top-[30%] h-[min(90vw,520px)] w-[min(90vw,520px)] rounded-full bg-onlan-lavender/50 blur-3xl"

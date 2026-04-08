@@ -7,8 +7,10 @@ import { ServicesHowItWorksSection } from './ServicesHowItWorksSection/ServicesH
 import { CompanyHeroSection } from './CompanyHeroSection/CompanyHeroSection';
 import { Reviews } from './Reviews';
 import { ContactUsSection } from './ContactUsSection';
+import { RegionsMarqueeSection } from './RegionsMarqueeSection';
 export const Widgets = {
     HeroSection,
+    RegionsMarqueeSection,
     AntiPainSection,
     AboutCompanySection,
     AboutUsNew,

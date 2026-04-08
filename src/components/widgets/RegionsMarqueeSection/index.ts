@@ -1,0 +1,1 @@
+export { RegionsMarqueeSection } from './RegionsMarqueeSection';

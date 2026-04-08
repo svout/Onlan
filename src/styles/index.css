@@ -671,6 +671,27 @@
     position: unset;
 }
 
+/* Home: регіони — безперервна горизонтальна прокрутка */
+@keyframes regions-marquee {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.regions-marquee-track {
+    animation: regions-marquee 55s linear infinite;
+    will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .regions-marquee-track {
+        animation: none;
+    }
+}
+
 /* Print Styles - минимальные изменения для сохранения оригинального вида */
 @media print {
     /* Принудительная печать цветов и фонов */
