@@ -8,15 +8,15 @@ import WhyChooseUsImage from '@images/WhyChooseUs.jpg';
 import Title from '@/components/elements/Title';
 
 const reasons: { num: string; lines: string[] }[] = [
-    { num: '01', lines: ['Комплексний сервіс'] },
-    { num: '02', lines: ['Контроль', 'і безпека'] },
-    { num: '03', lines: ['Прозора комунікація'] },
-    { num: '04', lines: ['Гнучкість', 'та швидке реагування'] },
-    { num: '05', lines: ['Індивідуальний підхід'] },
-    { num: '06', lines: ['Партнерський підхід'] },
+    { num: '01', lines: ['Контроль на кожному етапі'] },
+    { num: '02', lines: ['Перевірка документів до відправки'] },
+    { num: '03', lines: ['Пряма комунікація з усіма учасниками'] },
+    { num: '04', lines: ['Оперативне реагування в дорозі'] },
+    { num: '05', lines: ['Прозорість для клієнта'] },
+    { num: '06', lines: ['Комплексний супровід доставки'] },
 ];
 
-const columnLeftNums = new Set(['01', '03', '06']);
+const columnLeftNums = new Set(['01', '03', '05']);
 const columnLeft = reasons.filter((r) => columnLeftNums.has(r.num));
 const columnRight = reasons.filter((r) => !columnLeftNums.has(r.num));
 
@@ -159,7 +159,7 @@ export const WhyChooseUsSection = () => {
                     <div className="">
                         <Title
                             id="why-choose-heading"
-                            title="Чому вибирають нас"
+                            title="Як ми вирішуємо ці проблеми"
                             type="h1"
                             className="mt-2 w-full min-w-0 max-w-none text-left text-xl! font-bold! leading-snug! text-onlan-black md:mt-3 md:text-2xl! lg:text-[60px]!"
                         />
