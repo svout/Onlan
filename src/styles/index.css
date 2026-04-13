@@ -151,6 +151,14 @@
     }
 }
 
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-2px); }
+    40% { transform: translateX(2px); }
+    60% { transform: translateX(-1px); }
+    80% { transform: translateX(1px); }
+}
+
 @layer base {
     body {
         font-family: var(--font-albert);
@@ -203,7 +211,7 @@
 }
 
 @utility btn {
-    @apply font-normal hover:shadow-sm;
+    @apply font-normal hover:shadow-sm rounded-full;
 
     &.btn-link {
         @apply underline-offset-2;
@@ -235,7 +243,7 @@
 }
 
 @utility btn-link {
-    @apply border border-transparent rounded p-0;
+    @apply border border-transparent rounded-full p-0;
     
     &:hover {
         background: transparent;
@@ -252,7 +260,7 @@
 
 @utility btn-primary {
     &:not(.btn-soft, .btn-outline) {
-        @apply border border-transparent bg-onlan-blue shadow-none rounded-lg disabled:!bg-onlan-lavender disabled:bg-none disabled:!text-onlan-blue;
+        @apply border border-transparent bg-onlan-blue shadow-none rounded-full disabled:!bg-onlan-lavender disabled:bg-none disabled:!text-onlan-blue;
         
         &:hover {
             box-shadow: 0px 2px 4px 0px #00000029;
@@ -277,9 +285,9 @@
     }
 }
 
-@utility btn-soft {
-    &.btn-primary {
-        @apply border-none bg-transparent text-onlan-blue shadow-none hover:bg-onlan-white hover:text-onlan-blue active:!border active:border-solid active:border-onlan-lavender active:bg-onlan-white active:text-onlan-blue disabled:bg-transparent disabled:text-onlan-blue;
+@utility btn-lime {
+    &:not(.btn-soft, .btn-outline) {
+        @apply border border-transparent bg-onlan-lime text-onlan-black shadow-none rounded-full hover:bg-onlan-lime-dark hover:text-onlan-black active:bg-onlan-lime-dark disabled:!bg-onlan-lavender disabled:!text-onlan-blue;
     }
 }
 

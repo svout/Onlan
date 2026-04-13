@@ -82,7 +82,7 @@ export function Header() {
                                 Головна
                             </Link>
                             <Link
-                                to="/"
+                                to="/about-us"
                                 className="px-3 py-2 uppercase text-onlan-blue transition-all rounded-lg hover:text-onlan-black"
                             >
                                 Про Нас
@@ -146,7 +146,7 @@ export function Header() {
                             </Link>
                             
                             <Link
-                                to="/"
+                                to="/about-us"
                                 className="px-3 py-2 rounded-lg uppercase transition-all hover:bg-onlan-white hover:text-onlan-blue text-center"
                                 onClick={closeMenu}
                             >

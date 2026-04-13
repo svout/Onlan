@@ -1,170 +1,345 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
+import { Elements } from '@/components/elements';
+import { Link } from '@/lib/router';
+import { LogoSection } from '@/assets/icons/LogoSection';
 
 /* ═══════════════════════════════════ Data ═══════════════════════════════════ */
 
-const RISKS = [
-    { title: 'Митниця', copy: 'Затримки під час митного оформлення', consequence: 'зсув термінів доставки', kpi: 'Критична точка маршруту' },
-    { title: 'Склади', copy: 'Простої під час зберігання', consequence: 'збільшення вартості логістики', kpi: 'Додаткові витрати' },
-    { title: 'Перевізники', copy: 'Збої під час перевезень', consequence: 'ризики для доставки', kpi: 'Людський фактор' },
-    { title: 'Документи', copy: 'Помилки в документах', consequence: 'зупинка вантажів', kpi: 'Блокування на етапі оформлення' },
-    { title: 'Комунікація', copy: 'Відсутність координації', consequence: 'втрата контролю', kpi: 'Немає єдиного відповідального' },
+const CHAIN_NODES = [
+    { id: 'customs', icon: 'customs', title: 'Митниця', description: 'Затримки через перевірки та оформлення', badge: 'Delay' },
+    { id: 'warehouse', icon: 'warehouse', title: 'Склади', description: 'Простої та неузгодженість процесів', badge: 'Risk' },
+    { id: 'carrier', icon: 'carrier', title: 'Перевізники', description: 'Людський фактор і збої в дорозі', badge: 'Error' },
+    { id: 'comms', icon: 'comms', title: 'Комунікація', description: 'Відсутність контролю між учасниками', badge: 'Delay' },
+    { id: 'docs', icon: 'docs', title: 'Документи', description: 'Помилки перед відправкою', badge: 'Error' },
 ] as const;
 
-const IMPACTS = [
-    'зриви поставок',
-    'втрати часу і грошей',
-    'проблеми з клієнтами',
-    'ручний контроль процесу',
-] as const;
+const TRANSITION_LINE =
+    'Саме на цьому принципі побудована робота OnLan — повний контроль логістичного ланцюга та відповідальність за кожен етап доставки.';
 
-/* ═══════════════════════════════ Pill Badge ═════════════════════════════════ */
+/* ═══════════════════════════════ Icons (stroke, currentColor — OnLan palette) ═════════════════════════════════ */
 
-function PillLabel({ children }: { children: React.ReactNode }) {
-    return (
-        <span className="inline-flex items-center gap-2.5 rounded-full border border-onlan-black/18 bg-white/72 px-4 py-2 text-xs font-bold uppercase tracking-[0.05em] backdrop-blur-[10px]">
-            <span className="size-2 shrink-0 rounded-full bg-onlan-lime" aria-hidden />
-            {children}
-        </span>
-    );
+type ChainIconName = (typeof CHAIN_NODES)[number]['icon'];
+
+function ChainNodeIcon({ name, className }: { name: ChainIconName; className?: string }) {
+    const cn = clsx('size-7 shrink-0 md:size-8', className);
+    const svg = { className: cn, viewBox: '0 0 32 32', fill: 'none', xmlns: 'http://www.w3.org/2000/svg' } as const;
+    const stroke = {
+        stroke: 'currentColor',
+        strokeWidth: 2,
+        strokeLinecap: 'round' as const,
+        strokeLinejoin: 'round' as const,
+    };
+
+    switch (name) {
+        case 'customs':
+            return (
+                <svg {...svg} aria-hidden>
+                    <path d="M16 3L27 8.5V15.5C27 22.5 22 28 16 29.5C10 28 5 22.5 5 15.5V8.5L16 3Z" {...stroke} />
+                    <path d="M12 16L15 19L21 13" {...stroke} opacity={0.5} />
+                </svg>
+            );
+        case 'warehouse':
+            return (
+                <svg {...svg} aria-hidden>
+                    <path d="M4 14L16 6L28 14" {...stroke} />
+                    <path d="M7 13V26H25V13" {...stroke} />
+                    <path d="M13 26V19H19V26" {...stroke} opacity={0.5} />
+                </svg>
+            );
+        case 'carrier':
+            return (
+                <svg {...svg} aria-hidden>
+                    <path d="M3 18V10H20V18" {...stroke} />
+                    <path d="M20 12H25L29 18V23H27" {...stroke} />
+                    <path d="M3 23H5" {...stroke} />
+                    <circle cx="9" cy="23" r="3" {...stroke} opacity={0.5} />
+                    <circle cx="23" cy="23" r="3" {...stroke} opacity={0.5} />
+                    <path d="M12 23H20" {...stroke} />
+                </svg>
+            );
+        case 'comms':
+            return (
+                <svg {...svg} aria-hidden>
+                    <path d="M8 10H4V22L8 19H18V10H14" {...stroke} />
+                    <path d="M14 6H28V18H24L20 21V18H14V6Z" {...stroke} opacity={0.5} />
+                </svg>
+            );
+        case 'docs':
+            return (
+                <svg {...svg} aria-hidden>
+                    <path d="M8 4H20L26 10V28H8V4Z" {...stroke} />
+                    <path d="M20 4V10H26" {...stroke} />
+                    <path d="M13 16H21" {...stroke} opacity={0.5} />
+                    <path d="M13 20H18" {...stroke} opacity={0.5} />
+                </svg>
+            );
+    }
 }
 
 /* ═══════════════════════════════ Component ══════════════════════════════════ */
 
 export function AntiPainSection() {
+    const sectionRef = useRef<HTMLElement>(null);
+    const [visible, setVisible] = useState(false);
+    const [hoveredChain, setHoveredChain] = useState(false);
+
+    useEffect(() => {
+        const el = sectionRef.current;
+        if (!el) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            setVisible(true);
+            return;
+        }
+        const io = new IntersectionObserver(
+            ([entry]) => { if (entry.isIntersecting) setVisible(true); },
+            { threshold: 0.15, rootMargin: '0px 0px -5% 0px' },
+        );
+        io.observe(el);
+        return () => io.disconnect();
+    }, []);
+
     return (
         <section
-            className="relative overflow-hidden bg-onlan-white py-16 md:py-[84px] md:pb-24"
+            ref={sectionRef}
+            className="relative w-full overflow-hidden bg-onlan-white py-16 md:py-20 lg:py-24"
             aria-labelledby="anti-pain-heading"
         >
-            {/* Subtle grid pattern */}
+            {/* Branding watermark — top-right (z-0 so content z-10 paints above; opacity-100 overrides LogoSection default opacity-40) */}
             <div
-                className="pointer-events-none absolute inset-0 z-0"
-                style={{
-                    backgroundImage:
-                        'linear-gradient(rgba(13,13,13,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(13,13,13,0.03) 1px, transparent 1px)',
-                    backgroundSize: '40px 40px',
-                    maskImage: 'linear-gradient(180deg, rgba(0,0,0,0.35), transparent 92%)',
-                    WebkitMaskImage: 'linear-gradient(180deg, rgba(0,0,0,0.35), transparent 92%)',
-                }}
+                className="pointer-events-none absolute right-[-120px] rotate-12 top-[-60px] z-0 flex justify-end"
                 aria-hidden
-            />
+            >
+                <LogoSection className="h-auto w-[200px] rotate-[-10deg] text-onlan-blue/35 md:w-[280px] lg:w-[640px]" />
+            </div>
 
-            <div className="container relative z-10 mx-auto w-full">
+            <div className="container relative z-10 mx-auto">
+
+                {/* ═══════════ PILL ═══════════ */}
+                <div className="flex items-center justify-start gap-2">
+                    <div className="size-2 rounded-full bg-onlan-lime" />
+                    <div className="rounded-full border border-onlan-black px-4 py-2">
+                        <p className="text-sm font-semibold uppercase tracking-[0.14em] text-onlan-black">
+                            Ризики
+                        </p>
+                    </div>
+                </div>
 
                 {/* ═══════════ HEADER ═══════════ */}
-                <PillLabel>Ризики</PillLabel>
-
-                <header className="mb-8 mt-6">
+                <header
+                    className={clsx(
+                        'mt-6 transition-all duration-700 ease-out md:mt-8',
+                        visible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0',
+                    )}
+                >
                     <h2
                         id="anti-pain-heading"
-                        className="max-w-[720px] text-[clamp(2rem,4vw,3.4rem)] font-extrabold leading-[1.05] tracking-[-0.04em] text-onlan-black"
+                        className="max-w-3xl text-xl font-bold leading-snug text-onlan-black md:text-2xl lg:text-[60px] lg:leading-[1.1]"
                     >
-                        Де бізнес <span className="text-onlan-blue">втрачає контроль</span>
-                        <br className="hidden sm:block" />
-                        {' '}у міжнародній логістиці
+                        У логістиці вирішує не лише маршрут&nbsp;&mdash;{' '}
+                        <span className="text-onlan-blue">вирішує контроль процесу</span>
                     </h2>
 
-                    <p className="mt-2 max-w-[520px] text-[0.95rem] leading-relaxed text-onlan-blue/60">
+                    <p className="mt-3 max-w-xl text-sm leading-relaxed text-onlan-black/60 md:mt-4 md:text-base">
                         На доставку впливають десятки факторів&nbsp;&mdash; і більшість із них не контролюються системами.
                     </p>
                 </header>
 
-                {/* ═══════════ RISK CARDS ═══════════ */}
-                <div className="mb-12 grid grid-cols-1 gap-[18px] sm:grid-cols-2">
-                    {RISKS.map((card, i) => {
-                        const isCenter =
-                            i === RISKS.length - 1 && RISKS.length % 2 === 1;
-                        const isActive = i === 0;
-
-                        return (
-                            <article
-                                key={card.title}
-                                className={clsx(
-                                    'group relative rounded-[28px] border bg-white/72 p-6 backdrop-blur-[14px]',
-                                    'transition-all duration-250 ease-out',
-                                    'hover:-translate-y-1.5 hover:border-red-400 hover:shadow-[0_26px_56px_rgba(11,16,39,0.1)]',
-                                    isActive
-                                        ? 'border-onlan-blue/36 shadow-[0_0_0_1px_rgba(44,53,140,0.16),0_24px_50px_rgba(20,28,78,0.08)]'
-                                        : 'border-onlan-blue/14 shadow-[0_20px_50px_rgba(11,16,39,0.06)]',
-                                    isCenter && 'sm:col-span-2 sm:mx-auto sm:max-w-[calc(50%-9px)]',
-                                )}
-                            >
-                                {/* Category */}
-                                <div className="mb-4 flex items-center gap-2">
-                                    <span
-                                        className="size-2.5 shrink-0 rounded-full bg-onlan-lime shadow-[0_0_0_6px_rgba(201,222,0,0.12)]"
-                                        aria-hidden
-                                    />
-                                    <h3 className="text-[0.85rem] font-semibold text-onlan-blue">
-                                        {card.title}
-                                    </h3>
-                                </div>
-
-                                {/* Problem → consequence */}
-                                <p className="text-[1.08rem] leading-[1.42] tracking-[-0.02em] text-onlan-black sm:max-w-[92%]">
-                                    {card.copy}{' '}
-                                    <span className="font-bold text-onlan-blue" aria-hidden>&rarr;</span>{' '}
-                                    <span className="sr-only">— наслідок: </span>
-                                    {card.consequence}
-                                </p>
-
-                                {/* KPI badge */}
-                                <div className="mt-[18px] inline-flex items-center gap-2 rounded-full bg-onlan-blue/8 px-3 py-[7px] text-[0.78rem] font-semibold text-onlan-blue/60 transition-all duration-250 group-hover:opacity-100">
-                                    <span className="text-base leading-none text-onlan-lime" aria-hidden>&bull;</span>
-                                    {card.kpi}
-                                </div>
-                            </article>
-                        );
-                    })}
-                </div>
-
-                {/* ═══════════ IMPACT PANEL ═══════════ */}
+                {/* ═══════════ SUPPLY CHAIN FLOW ═══════════ */}
                 <div
-                    className="relative rounded-[30px] border border-onlan-black/8 bg-linear-to-b from-white/72 to-white/86 p-5 shadow-[0_20px_50px_rgba(11,16,39,0.06)] backdrop-blur-[14px] md:p-7"
+                    className="relative mt-10 md:mt-14"
+                    onMouseEnter={() => setHoveredChain(true)}
+                    onMouseLeave={() => setHoveredChain(false)}
                 >
-                    {/* Dashed inner border */}
-                    <div
-                        className="pointer-events-none absolute inset-3 rounded-[20px] border border-dashed border-onlan-blue/14 md:inset-[18px]"
-                        aria-hidden
-                    />
-
-                    {/* Impact header */}
-                    <div className="relative z-10 mb-5 flex flex-wrap items-end justify-between gap-x-6 gap-y-4 md:mb-[22px]">
-                        <div>
-                            <PillLabel>Наслідки</PillLabel>
-                            <h3 className="mt-3 text-[1.35rem] font-bold leading-[1.15] tracking-[-0.03em] text-onlan-black">
-                                Для бізнесу це означає:
-                            </h3>
+                    {/* Desktop: horizontal chain with connecting line */}
+                    <div className="hidden lg:block">
+                        {/* Flow line behind cards */}
+                        <div className="absolute left-0 right-0 top-1/2 z-0 h-px -translate-y-1/2">
+                            <div
+                                className={clsx(
+                                    'h-full w-full transition-all duration-500',
+                                    hoveredChain ? 'bg-red-400/50' : 'bg-onlan-lavender',
+                                )}
+                            />
+                            {/* Animated pulse on hover */}
+                            {hoveredChain && (
+                                <div className="absolute inset-0 animate-pulse bg-linear-to-r from-transparent via-red-400/30 to-transparent" />
+                            )}
                         </div>
 
-                        <p className="max-w-[330px] text-[0.96rem] leading-[1.45] text-onlan-blue/60">
-                            Точки ризику швидко перетворюються на втрату маржі, дедлайнів і довіри клієнта.
-                        </p>
-                    </div>
+                        <div className="relative z-10 grid grid-cols-5 gap-4">
+                            {CHAIN_NODES.map((node, i) => (
+                                <ChainCard
+                                    key={node.id}
+                                    node={node}
+                                    index={i}
+                                    visible={visible}
+                                    chainHovered={hoveredChain}
+                                />
+                            ))}
+                        </div>
 
-                    {/* Impact grid */}
-                    <div className="relative z-10 grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
-                        {IMPACTS.map((text) => (
-                            <div
-                                key={text}
-                                className="min-h-[112px] rounded-[22px] border border-onlan-black/8 bg-white/72 p-4 transition-all duration-220 hover:-translate-y-1 hover:border-onlan-lime/40 hover:bg-white"
-                            >
-                                <div
-                                    className="mb-3.5 flex size-7 items-center justify-center rounded-full bg-onlan-lime text-[0.95rem] font-extrabold text-onlan-black shadow-[0_10px_20px_rgba(201,222,0,0.2)]"
+                        {/* Arrow connectors */}
+                        <div className="absolute left-0 right-0 top-1/2 z-5 flex -translate-y-1/2 justify-around px-[calc(20%-2rem)]">
+                            {[0, 1, 2, 3].map((i) => (
+                                <span
+                                    key={i}
+                                    className={clsx(
+                                        'text-lg transition-colors duration-300',
+                                        hoveredChain ? 'text-red-400' : 'text-onlan-lavender',
+                                    )}
                                     aria-hidden
                                 >
-                                    ✕
+                                    →
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Tablet / mobile: zig-zag vertical chain */}
+                    <div className="lg:hidden">
+                        <div className="flex flex-col gap-4">
+                            {CHAIN_NODES.map((node, i) => (
+                                <div key={node.id} className="flex items-stretch gap-4">
+                                    {/* Vertical line + dot */}
+                                    <div className="flex w-6 shrink-0 flex-col items-center">
+                                        <div
+                                            className={clsx(
+                                                'size-3 shrink-0 rounded-full border-2 transition-colors duration-300',
+                                                hoveredChain
+                                                    ? 'border-red-400 bg-red-400/20'
+                                                    : 'border-onlan-blue bg-onlan-lavender',
+                                            )}
+                                        />
+                                        {i < CHAIN_NODES.length - 1 && (
+                                            <div
+                                                className={clsx(
+                                                    'w-px flex-1 transition-colors duration-300',
+                                                    hoveredChain ? 'bg-red-400/40' : 'bg-onlan-lavender',
+                                                )}
+                                            />
+                                        )}
+                                    </div>
+
+                                    <ChainCard
+                                        node={node}
+                                        index={i}
+                                        visible={visible}
+                                        chainHovered={hoveredChain}
+                                        mobile
+                                    />
                                 </div>
-                                <p className="text-[0.98rem] leading-[1.35] text-onlan-black/90">
-                                    {text}
-                                </p>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </div>
+
+                {/* ═══════════ CTA ═══════════ */}
+                <div
+                    className={clsx(
+                        'mt-10 transition-all duration-700 ease-out md:mt-14',
+                        visible ? 'translate-y-0 opacity-100 delay-500' : 'translate-y-6 opacity-0',
+                    )}
+                >
+                    <Link to="/#why-choose" className="inline-flex w-full sm:w-auto">
+                        <Elements.Button
+                            variant="primary"
+                            size="md"
+                            className="h-12 w-full justify-center whitespace-nowrap sm:w-auto lg:h-14 lg:px-9"
+                        >
+                            <span className="text-base font-semibold md:text-lg">
+                                Як OnLan вирішує ці ризики →
+                            </span>
+                        </Elements.Button>
+                    </Link>
+                </div>
+
+                {/* ═══════════ TRANSITION LINE ═══════════ */}
+
             </div>
         </section>
+    );
+}
+
+/* ═══════════════════════════════ Chain Card ═════════════════════════════════ */
+
+type ChainNode = (typeof CHAIN_NODES)[number];
+
+function ChainCard({
+    node,
+    index,
+    visible,
+    chainHovered,
+    mobile,
+}: {
+    node: ChainNode;
+    index: number;
+    visible: boolean;
+    chainHovered: boolean;
+    mobile?: boolean;
+}) {
+    const delay = index * 100;
+
+    return (
+        <article
+            className={clsx(
+                'group relative flex flex-col rounded-2xl border bg-onlan-white p-5 transition-all duration-300',
+                mobile ? 'mb-0 flex-1' : '',
+                chainHovered
+                    ? 'border-red-400/50 shadow-[0_0_16px_rgba(248,113,113,0.12)]'
+                    : 'border-onlan-lavender shadow-card hover:border-onlan-blue/30 hover:shadow-[0_4px_20px_rgba(44,53,140,0.1)]',
+                visible
+                    ? 'translate-y-0 opacity-100'
+                    : 'translate-y-8 opacity-0',
+            )}
+            style={{
+                transitionDelay: visible ? `${delay}ms` : '0ms',
+            }}
+        >
+            {/* Badge */}
+            <span
+                className={clsx(
+                    'absolute right-4 top-4 rounded-full px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wider transition-colors duration-300',
+                    chainHovered
+                        ? 'bg-red-50 text-red-500'
+                        : 'bg-onlan-lavender/50 text-onlan-blue/60',
+                )}
+            >
+                {node.badge}
+            </span>
+
+            {/* Icon */}
+            <span
+                className={clsx(
+                    'text-onlan-blue transition-transform duration-300',
+                    chainHovered && 'animate-[shake_0.4s_ease-in-out]',
+                )}
+            >
+                <ChainNodeIcon name={node.icon} />
+            </span>
+
+            {/* Title */}
+            <h3 className="mt-3 text-base font-bold text-onlan-black md:text-lg">
+                {node.title}
+            </h3>
+
+            {/* Description */}
+            <p className="mt-1.5 text-sm leading-snug text-onlan-black/60">
+                {node.description}
+            </p>
+
+            {/* Disruption indicator on hover */}
+            <div
+                className={clsx(
+                    'pointer-events-none absolute inset-0 rounded-2xl border-2 transition-opacity duration-300',
+                    chainHovered
+                        ? 'border-red-400/30 opacity-100'
+                        : 'border-transparent opacity-0',
+                )}
+                aria-hidden
+            />
+        </article>
     );
 }

@@ -34,6 +34,12 @@ export const NOT_FOUND_SEO: PageSeoConfig = {
     noIndex: true,
 };
 
+export const ABOUT_US_SEO: PageSeoConfig = {
+    title: 'About Us',
+    description: 'About Us',
+    path: '/about',
+};
+
 function normalizePath(path: string): string {
     if (path === '/') {
         return '/';

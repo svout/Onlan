@@ -13,7 +13,8 @@ export type ButtonVariant =
     | 'ghost'
     | 'link'
     | 'white'
-    | 'blue';
+    | 'blue'
+    | 'lime';
 
 export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 

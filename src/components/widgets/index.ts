@@ -8,6 +8,7 @@ import { CompanyHeroSection } from './CompanyHeroSection/CompanyHeroSection';
 import { Reviews } from './Reviews';
 import { ContactUsSection } from './ContactUsSection';
 import { RegionsMarqueeSection } from './RegionsMarqueeSection';
+import { AboutUsHero } from './AboutUsHero';
 export const Widgets = {
     HeroSection,
     RegionsMarqueeSection,
@@ -19,4 +20,5 @@ export const Widgets = {
     CompanyHeroSection,
     Reviews,
     ContactUsSection,
+    AboutUsHero,
 };

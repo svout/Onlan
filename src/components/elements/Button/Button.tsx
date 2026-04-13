@@ -41,6 +41,7 @@ export default function Button({
         link: 'btn-link',
         white: 'btn-white',
         blue: 'btn-blue',
+        lime: 'btn-lime',
     };
 
     const sizeClasses: Record<ButtonSize, string> = {
