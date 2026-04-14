@@ -75,7 +75,7 @@ export function Reviews() {
                 className="pointer-events-none absolute inset-0 z-0 flex select-none items-end justify-start"
                 aria-hidden
             >
-                <LogoSection className="block h-auto w-[min(85vw,320px)] max-w-full shrink-0 md:w-[400px]" />
+                <LogoSection className="absolute top-0 left-0 w-full max-w-full shrink-0 opacity-40 md:w-[500px]" />
             </div>
 
             <div className="relative z-10 container mx-auto flex flex-col items-start px-4">
@@ -102,7 +102,7 @@ export function Reviews() {
 
                     <div className="flex min-w-0 flex-1 flex-col gap-6 sm:flex-row sm:items-start sm:gap-4 md:gap-6">
                         <span
-                            className="select-none font-serif font-bold leading-none text-onlan-blue [font-size:clamp(4rem,18vw,130px)]"
+                            className="select-none font-bold leading-none text-onlan-blue [font-size:clamp(4rem,18vw,130px)]"
                             aria-hidden
                         >
                             &ldquo;

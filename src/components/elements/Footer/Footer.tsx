@@ -27,10 +27,8 @@ export const Footer = () => {
 
     return (
         <footer className="mt-auto w-full overflow-hidden bg-onlan-blue">
-            <div className="container mx-auto px-4 py-12 md:py-16 lg:py-20">
-                <div
-                    className={`flex flex-col lg:flex-row lg:items-start lg:justify-between gap-12`}
-                >
+            <div className="container mx-auto w-full px-4 py-12 md:py-16 lg:py-20">
+                <div className="flex min-w-0 flex-col gap-5 lg:flex-row lg:items-start lg:gap-6 xl:gap-8">
                     <div className="max-w-md shrink-0">
                         <Link
                             to="/"
@@ -77,10 +75,8 @@ export const Footer = () => {
                         </div>
                     </div>
 
-                    <div
-                        className={`grid w-full grid-cols-1 sm:max-w-xl sm:grid-cols-2 lg:max-w-none lg:flex-1 lg:grid-cols-3 gap-12`}
-                    >
-                        <nav className="min-w-0">
+                    <div className="grid grid-cols-3 pl-10">
+                        <nav className="">
                             <h3 className="text-lg font-semibold text-onlan-white md:text-xl">Навігація</h3>
                             <div className="mt-4 flex flex-col gap-3 text-sm font-normal md:text-base">
                                 <Link to="/" className={linkClass}>
@@ -101,7 +97,7 @@ export const Footer = () => {
                             </div>
                         </nav>
 
-                        <nav className="min-w-0">
+                        <nav className="">
                             <h3 className="text-lg font-semibold text-onlan-white md:text-xl">Юридична інформація</h3>
                             <div className="mt-4 flex flex-col gap-3 text-sm font-normal md:text-base">
                                 <Link to="/" className={linkClass}>
@@ -113,23 +109,24 @@ export const Footer = () => {
                             </div>
                         </nav>
 
-                        <address className="min-w-0 not-italic sm:col-span-2 lg:col-span-1">
+                        <address className="not-italic min-w-0 max-w-full">
                             <h4 className="text-lg font-semibold text-onlan-white md:text-xl">Контакти</h4>
-                            <div className="mt-4 flex flex-col gap-3 text-sm font-normal text-onlan-white/90 md:text-base">
-                                <p>{CONTACT.location}</p>
+                            <div className="mt-4 flex min-w-0 max-w-full flex-col gap-3 text-sm font-normal not-italic text-onlan-white/90 md:text-base">
+                                <p className="min-w-0 wrap-break-word">{CONTACT.location}</p>
                                 <a
                                     href={`mailto:${CONTACT.email}`}
-                                    className={`${linkClass} inline-flex items-start gap-2`}
+                                    className={`${linkClass} flex min-w-0 max-w-full items-center gap-2 overflow-x-auto`}
+                                    title={CONTACT.email}
                                 >
-                                    <FaEnvelope className="mt-0.5 size-4 shrink-0 text-onlan-lime" aria-hidden />
-                                    <span>{CONTACT.email}</span>
+                                    <FaEnvelope className="size-4 shrink-0 text-onlan-lime" aria-hidden />
+                                    <span className="whitespace-nowrap">{CONTACT.email}</span>
                                 </a>
                                 <a
                                     href={`tel:${CONTACT.phoneTel}`}
-                                    className={`${linkClass} inline-flex items-start gap-2`}
+                                    className={`${linkClass} flex min-w-0 max-w-full items-start gap-2`}
                                 >
                                     <FaPhone className="mt-0.5 size-4 shrink-0 text-onlan-lime" aria-hidden />
-                                    <span>{CONTACT.phoneDisplay}</span>
+                                    <span className="min-w-0 wrap-break-word">{CONTACT.phoneDisplay}</span>
                                 </a>
                             </div>
                         </address>

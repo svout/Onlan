@@ -12,10 +12,10 @@ export const AboutUsHero = () => {
     return (
         <section className="relative h-[calc(100vh-80px)] min-h-0 w-full overflow-hidden bg-onlan-white/90 py-12 md:py-16 lg:py-20">
             <div className="relative z-10 container mx-auto flex flex-col items-center justify-center gap-10 px-4">
-                <div className="flex items-center justify-center">
+                <div className="flex w-full max-w-[1200px] justify-between items-center">
                     {/* Left — same layout as before: centered column, staggered rows */}
-                    <div className="flex flex-col items-center gap-10">
-                        <div className="flex w-full max-w-[700px] flex-col">
+                    <div className="flex flex-col w-full max-w-[700px] items-center">
+                        <div className="flex justify-center flex-col">
                             <div className="flex items-center justify-end gap-2">
                                 <div className="flex items-center justify-center">
                                     <div className="mr-[-30px] flex size-[78px] items-center justify-center rounded-full bg-[#EAEAEA]">
@@ -44,11 +44,11 @@ export const AboutUsHero = () => {
                                 </div>
                             </div>
 
-                            <div className="flex items-center justify-start">
+                            <div className="flex min-w-0 items-center justify-start overflow-x-auto">
                                 <Elements.Title
                                     title="логістичний партнер"
                                     type="h1"
-                                    className="uppercase font-bold! text-onlan-black"
+                                    className="whitespace-nowrap uppercase font-bold! text-onlan-black"
                                 />
                             </div>
                             <div className="flex items-center justify-end">
@@ -61,18 +61,15 @@ export const AboutUsHero = () => {
                         </div>
                     </div>
 
-                    {/* Right — hero image 400×200 */}
-                    <div className="flex w-full justify-end lg:justify-end">
-                        <Image
-                            src={heroPhoto}
-                            alt="Вантажівка OnLan на міжнародному маршруті — нічний перевіз вантажу"
-                            width={400}
-                            height={300}
-                            className="h-[300px] w-full max-w-[400px] rounded-2xl border border-onlan-black/10 object-cover object-center shadow-[0_20px_50px_rgba(0,0,0,0.12)]"
-                            sizes="400px"
-                            priority
-                        />
-                    </div>
+                    <Image
+                        src={heroPhoto}
+                        alt="Вантажівка OnLan на міжнародному маршруті — нічний перевіз вантажу"
+                        width={400}
+                        height={300}
+                        className="h-[300px] w-full max-w-[400px] rounded-2xl border border-onlan-black/10 object-cover object-center shadow-[0_20px_50px_rgba(0,0,0,0.12)]"
+                        sizes="400px"
+                        priority
+                    />
                 </div>
 
                 <div className="flex flex-col items-center justify-center gap-5">
@@ -81,10 +78,10 @@ export const AboutUsHero = () => {
                         type="medium"
                     />
 
-                    <Link to="/contact" className="flex items-center justify-center gap-2">
+                    <Link to="/contact" className="flex items-center justify-center gap-1">
                         <Elements.Button variant="lime" size="xl">
-                            <span className="text-base font-semibold md:text-lg lg:text-[19px]">
-                                Отримати розрахунок доставки
+                            <span className="text-base uppercase font-semibold md:text-lg lg:text-[19px]">
+                                Дізнатися більше про нас
                             </span>
                         </Elements.Button>
                         <span className="flex size-[60px] items-center justify-center rounded-full bg-onlan-lime">

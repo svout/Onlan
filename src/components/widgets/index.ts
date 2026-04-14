@@ -9,6 +9,9 @@ import { Reviews } from './Reviews';
 import { ContactUsSection } from './ContactUsSection';
 import { RegionsMarqueeSection } from './RegionsMarqueeSection';
 import { AboutUsHero } from './AboutUsHero';
+import { AboutUsCompanyIntro } from './AboutUsCompanyIntro';
+import { AboutUsAdvantagesSection } from './AboutUsAdvantagesSection';
+import { AboutUsHistorySection } from './AboutUsHistorySection';
 export const Widgets = {
     HeroSection,
     RegionsMarqueeSection,
@@ -21,4 +24,7 @@ export const Widgets = {
     Reviews,
     ContactUsSection,
     AboutUsHero,
+    AboutUsCompanyIntro,
+    AboutUsAdvantagesSection,
+    AboutUsHistorySection,
 };
