@@ -12,6 +12,8 @@ import { AboutUsHero } from './AboutUsHero';
 import { AboutUsCompanyIntro } from './AboutUsCompanyIntro';
 import { AboutUsAdvantagesSection } from './AboutUsAdvantagesSection';
 import { AboutUsHistorySection } from './AboutUsHistorySection';
+import { AboutUsTeamSection } from './AboutUsTeamSection';
+import { AboutUsValuesSection } from './AboutUsValuesSection';
 export const Widgets = {
     HeroSection,
     RegionsMarqueeSection,
@@ -26,5 +28,7 @@ export const Widgets = {
     AboutUsHero,
     AboutUsCompanyIntro,
     AboutUsAdvantagesSection,
+    AboutUsValuesSection,
+    AboutUsTeamSection,
     AboutUsHistorySection,
 };

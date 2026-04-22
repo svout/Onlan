@@ -9,6 +9,8 @@ export default function AboutUsPage() {
             <Containers.Section el={<Widgets.AboutUsCompanyIntro />} />
             <Containers.Section el={<Widgets.AboutUsAdvantagesSection />} />
             <Containers.Section el={<Widgets.AboutUsHistorySection />} />
+            <Containers.Section el={<Widgets.AboutUsTeamSection />} />
+            <Containers.Section el={<Widgets.AboutUsValuesSection />} />
         </>
     );
 }
