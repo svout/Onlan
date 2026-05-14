@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { Link } from 'react-router';
-import trackSunset from '@/assets/images/aboutUsTrackSunset.png';
+import aboutUsPhoto from '@/assets/images/AboutUsNew.png';
 
 const COPY = {
     body: 'ONLAN — українська компанія, що забезпечує надійну доставку, створюючи маршрути, які гарантують, що ваш вантаж прибуде вчасно та саме туди, де він потрібен.',
@@ -30,10 +30,10 @@ export function AboutUsNew() {
 
                 <div className="relative mt-8 h-[450px] rounded-2xl w-full min-w-0 overflow-hidden md:mt-10">
                     <Image
-                        src={trackSunset}
-                        alt="Вантажівка на трасі — логістика та доставка ONLAN"
+                        src={aboutUsPhoto}
+                        alt="Сучасний логістичний склад ONLAN з зонами завантаження та контролем вантажів"
                         fill
-                        className="object-cover object-[20%_80%]"
+                        className="object-cover object-center"
                         sizes="(max-width: 768px) calc(100vw - 2rem), (max-width: 1280px) calc(100vw - 2rem), 1200px"
                     />
                 </div>
