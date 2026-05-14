@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
 import { FaEnvelope, FaInstagram, FaLinkedinIn, FaPhone } from 'react-icons/fa6';
+import footerBackground from '@/assets/images/FooterBackground.png';
 import Description from '@/components/elements/Description';
 import { LogoFooter } from '@/assets/icons/LogoFooter';
 
@@ -26,8 +27,17 @@ export const Footer = () => {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="mt-auto w-full overflow-hidden bg-onlan-blue">
-            <div className="container mx-auto w-full px-4 py-12 md:py-16 lg:py-20">
+        <footer className="relative mt-auto w-full overflow-hidden">
+            <div className="pointer-events-none absolute inset-0" aria-hidden>
+                <div
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${footerBackground})` }}
+                />
+                <div className="absolute inset-0 bg-onlan-blue/82" />
+                <div className="absolute inset-0 bg-gradient-to-t from-onlan-black/35 to-transparent" />
+            </div>
+
+            <div className="relative z-10 container mx-auto w-full px-4 py-12 md:py-16 lg:py-20">
                 <div className="flex min-w-0 flex-col gap-5 lg:flex-row lg:items-start lg:gap-6 xl:gap-8">
                     <div className="max-w-md shrink-0">
                         <Link
