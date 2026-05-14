@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import type { ServiceContent } from '@/types/Service.interface';
 
 const FALLBACK_SITE_URL = 'https://onlan.com';
 const DEFAULT_SITE_DESCRIPTION =
@@ -39,6 +40,17 @@ export const ABOUT_US_SEO: PageSeoConfig = {
     description: 'About Us',
     path: '/about',
 };
+
+export function createServiceSeoConfig(service: ServiceContent): PageSeoConfig {
+    return {
+        title:
+            service.seo?.title ??
+            `${service.title} | ${service.tagLabel} | ${SITE_NAME}`,
+        description: service.seo?.description ?? service.lead,
+        path: `/services/${service.slug}`,
+        jsonLdType: 'Service',
+    };
+}
 
 function normalizePath(path: string): string {
     if (path === '/') {

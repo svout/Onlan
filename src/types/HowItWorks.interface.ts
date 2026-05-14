@@ -4,7 +4,8 @@ export type ServiceIconId =
     | 'plane'
     | 'train'
     | 'oversize'
-    | 'customs';
+    | 'customs'
+    | 'multimodal';
 
 export interface HowItWorksServiceItem {
     number: string;
@@ -19,4 +20,6 @@ export interface HowItWorksServiceItem {
 export type HowItWorkProps = HowItWorksServiceItem & {
     index: number;
     total: number;
+    /** Resolved asset URL from webpack (`asset/resource` import). */
+    backgroundImageSrc: string;
 };

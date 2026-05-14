@@ -89,7 +89,7 @@ function WhyChooseUsStats() {
                 >
                     {clientsPct}%
                 </span>
-                <p className="max-w-2xl text-left text-base font-semibold text-onlan-blue sm:text-lg md:text-[60px]">
+                <p className="max-w-3xl min-w-0 flex-1 text-left text-base font-semibold text-onlan-blue sm:text-lg md:text-[60px]">
                     Задоволених клієнтів
                 </p>
             </div>
@@ -104,7 +104,7 @@ function WhyChooseUsStats() {
                 >
                     {cargoPct}%
                 </span>
-                <p className="max-w-2xl min-w-0 flex-1 pl-2 text-left text-base font-semibold text-onlan-lime sm:pl-6 sm:text-lg md:pl-10 md:text-[60px] lg:pl-14">
+                <p className="max-w-3xl min-w-0 flex-1 text-left text-base font-semibold text-onlan-lime sm:text-lg md:text-[60px]">
                     Вантажів проходить без затримок
                 </p>
             </div>
@@ -146,17 +146,10 @@ export const WhyChooseUsSection = () => {
                 </div>
 
                 <div className="mt-6 flex w-full flex-col gap-10 md:mt-8 md:flex-row md:items-stretch md:gap-10 lg:gap-14">
-                    <div className=" rounded-2xl">
-                        <Image
-                            src={WhyChooseUsImage}
-                            alt="Автотранспорт для доставки вантажів ONLAN"
-                            width={500}
-                            height={500}
-                            className=" rounded-2xl object-contain"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 640px"
-                        />
+                    <div className='rounded-2xl w-full max-w-[400px]'>
+                        <Image src={WhyChooseUsImage} alt="Автотранспорт для доставки вантажів ONLAN" width={400} height={800} className='w-full h-full object-cover object-center rounded-2xl' />
                     </div>
-                    <div className="">
+                    <div className="min-w-0 flex-1">
                         <Title
                             id="why-choose-heading"
                             title="Як ми вирішуємо ці проблеми"

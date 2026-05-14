@@ -18,7 +18,7 @@ export function ContactUsSection() {
             if (!accepted) {
                 return;
             }
-            // Hook up to API / mail when ready
+            // Підключення API / листа — за потреби
         },
         [accepted],
     );
@@ -30,7 +30,7 @@ export function ContactUsSection() {
                     <div className="size-2 shrink-0 rounded-full bg-onlan-lime" />
                     <div className="rounded-full border border-onlan-black px-4 py-2">
                         <p className="text-left text-sm font-semibold uppercase tracking-[0.14em] text-onlan-black">
-                            контакти
+                            Контакти
                         </p>
                     </div>
                 </div>
@@ -51,7 +51,12 @@ export function ContactUsSection() {
                     </div>
 
                     <div className="relative z-10 w-full max-w-[624px] p-6 md:p-8 lg:p-10 xl:p-12">
-                        <Title title="Довірте нам свою логістику" type="h2" className="text-onlan-white !text-[60px]" />
+                        <Title
+                            id="contact-us-section-heading"
+                            title="Довірте нам свою логістику"
+                            type="h2"
+                            className="text-onlan-white !text-[60px]"
+                        />
                         <p className="mt-3 text-base font-medium text-onlan-lavender md:text-lg">
                             І отримаєте сервіс, на який можна покластися.
                         </p>
@@ -63,7 +68,7 @@ export function ContactUsSection() {
                                 type="text"
                                 label="Ім’я"
                                 labelClassName="!text-onlan-white"
-                                placeholder="Ваше Ім'я"
+                                placeholder="Ваше ім’я"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 inputWrapClassName="flex !h-[61px] min-h-[61px] items-center bg-onlan-white border-onlan-white"
@@ -85,25 +90,25 @@ export function ContactUsSection() {
                             />
 
                             <p className="text-xs leading-relaxed text-onlan-white/75 md:text-sm">
-                                This site is protected by reCAPTCHA and the Google{' '}
+                                Цей сайт захищено reCAPTCHA. Діють{' '}
                                 <a
                                     href="https://policies.google.com/privacy"
                                     className="underline underline-offset-2 hover:text-onlan-white"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    Privacy Policy
+                                    Політика конфіденційності
                                 </a>{' '}
-                                and{' '}
+                                та{' '}
                                 <a
                                     href="https://policies.google.com/terms"
                                     className="underline underline-offset-2 hover:text-onlan-white"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    Terms of Service
+                                    Умови використання
                                 </a>{' '}
-                                apply.
+                                Google.
                             </p>
 
                             <label className="flex cursor-pointer items-center gap-3 text-sm text-onlan-white md:text-base">
@@ -141,12 +146,12 @@ export function ContactUsSection() {
                                     </span>
                                 </span>
                                 <span className="leading-snug">
-                                    I accept the{' '}
+                                    Я приймаю{' '}
                                     <Link
                                         to="/terms"
                                         className="font-semibold underline underline-offset-2 hover:text-onlan-lime"
                                     >
-                                        Terms and Conditions
+                                        Умови та положення
                                     </Link>
                                 </span>
                             </label>

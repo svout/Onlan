@@ -3,7 +3,7 @@ import Container from '@images/container.png';
 import Title from '@/components/elements/Title';
 
 const hero = {
-    h1: 'Міжнародні перевезення Європа, Китай – імпортуємо та експортуємо ваш вантаж.',
+    h1: 'Міжнародні перевезення Європа, Китай ',
     description:
         'Експрес-логістика для бізнесу, що рухається швидко. Митниця за 24 години, повний контроль маршруту, нульові затримки.',
     cta: 'Отримати розрахунок доставки →',
@@ -13,8 +13,8 @@ export const HeroSection = () => {
     return (
         <section className="relative w-full h-[calc(100vh-80px)] overflow-hidden bg-onlan-white/90 py-12 md:py-16 lg:py-20">
             <div className="relative z-10 container mx-auto px-4">
-                <div className="flex flex-col gap-10 md:flex-row md:items-center md:gap-12 lg:gap-16">
-                    <div className="flex w-full max-w-xl flex-1 flex-col items-center text-center md:items-start md:text-left">
+                <div className="flex flex-col gap-10 md:flex-row md:items-center md:gap-10 lg:gap-10">
+                    <div className="flex w-full max-w-2xl flex-1 flex-col items-center text-center md:items-start md:text-left">
 
                         <Title title={hero.h1} type="h1" className="text-balance font-bold leading-tight text-onlan-black md:mt-5" />
 

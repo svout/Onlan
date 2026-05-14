@@ -14,6 +14,14 @@ import { AboutUsAdvantagesSection } from './AboutUsAdvantagesSection';
 import { AboutUsHistorySection } from './AboutUsHistorySection';
 import { AboutUsTeamSection } from './AboutUsTeamSection';
 import { AboutUsValuesSection } from './AboutUsValuesSection';
+import {
+    ServiceHero,
+    ServiceBenefits,
+    ServiceProcess,
+    ServiceCargoTypes,
+    ServiceFaq,
+} from './ServiceTemplate';
+
 export const Widgets = {
     HeroSection,
     RegionsMarqueeSection,
@@ -31,4 +39,9 @@ export const Widgets = {
     AboutUsValuesSection,
     AboutUsTeamSection,
     AboutUsHistorySection,
+    ServiceHero,
+    ServiceBenefits,
+    ServiceProcess,
+    ServiceCargoTypes,
+    ServiceFaq,
 };

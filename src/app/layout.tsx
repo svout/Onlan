@@ -4,6 +4,7 @@ import localFont from 'next/font/local';
 import './globals.css';
 import ClientShell from '@/components/app/ClientShell';
 import JsonLd from '@/components/app/JsonLd';
+import { Preloader } from '@/components/elements/Preloader';
 import {
     createOrganizationJsonLd,
     createRootMetadata,
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang="en" className={`${EUkraine.variable} ${EUkraine.className}`}>
             <body>
+                <Preloader />
                 <JsonLd data={organizationJsonLd} />
                 <JsonLd data={websiteJsonLd} />
                 <ClientShell>{children}</ClientShell>

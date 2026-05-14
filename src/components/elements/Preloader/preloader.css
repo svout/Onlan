@@ -1,0 +1,189 @@
+/* =========================================================================
+   PREMIUM PRELOADER — STYLES
+   -------------------------------------------------------------------------
+   Onlan brand split (deep blue + lime) with a 15° tilted diagonal through
+   the viewport centre. Two flat colours meet along one straight edge: the
+   base is solid blue; a solid lime layer is clipped with `clip-path` so
+   there is no gradient band — only a geometric join (no third “border”
+   colour between them).
+
+   The logo is the original solid white mark (same as PreloaderLogo.svg).
+
+   CUSTOMIZE
+   ---------
+   • Colors and timings live as CSS custom properties at the top.
+   • Replace the SVG inside <PreloaderLogo /> to swap the brand mark.
+   • Sizes are responsive via clamp().
+
+   PERFORMANCE
+   -----------
+   • Animations use only `transform` and `opacity` so they run on the GPU.
+   • `will-change` is declared only on actively animated nodes.
+   ========================================================================= */
+
+:root {
+    --preloader-blue: #2c358c;
+    --preloader-lime: #d5e82d;
+    --preloader-min-duration: 2000ms;
+    --preloader-exit-duration: 900ms;
+    --preloader-ease: cubic-bezier(0.65, 0, 0.35, 1);
+    --preloader-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* -------------------------------------------------------------------------
+   Scroll lock — CSS-only via :has(), so we never mutate <html>/<body>
+   before React hydrates (avoids hydration mismatch). When the preloader
+   gains `.is-hidden`, these rules no longer apply and scrolling returns.
+
+   Browsers without :has() (< Safari 15.4) may allow brief scroll until the
+   overlay is dismissed; impact is minimal on current evergreen targets.
+   ------------------------------------------------------------------------- */
+@supports selector(:has(*)) {
+    html:has(#site-preloader:not(.is-hidden)) {
+        overflow: hidden !important;
+        height: 100% !important;
+        touch-action: none;
+        overscroll-behavior: none;
+    }
+    html:has(#site-preloader:not(.is-hidden)) body {
+        overflow: hidden !important;
+        height: 100% !important;
+        touch-action: none;
+        overscroll-behavior: none;
+    }
+}
+
+/* -------------------------------------------------------------------------
+   Overlay — full-viewport, top-most, instant first paint.
+   The base color is the brand blue so the left half is correct even
+   before the lime layer paints.
+   ------------------------------------------------------------------------- */
+.preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483647;
+    overflow: hidden;
+    pointer-events: auto;
+    background-color: var(--preloader-blue);
+    contain: layout paint style;
+    transition:
+        opacity var(--preloader-exit-duration) var(--preloader-ease-out),
+        transform var(--preloader-exit-duration) var(--preloader-ease-out),
+        visibility 0s linear var(--preloader-exit-duration);
+    will-change: opacity, transform;
+}
+
+.preloader.is-hidden {
+    opacity: 0;
+    transform: translate3d(0, -2vh, 0);
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* -------------------------------------------------------------------------
+   Background split — geometric join (no gradient)
+   Solid blue is the `.preloader` base. A full-size solid lime layer sits
+   on top and is clipped to the region *to the right* of a straight line
+   through the viewport centre tilted 15° from vertical.
+
+   Geometry: tan(15°) ≈ 0.2679. Half the viewport height = 50vh, so the
+   horizontal run from centre to top/bottom edge of the line ≈ 13.4vh.
+   Result: two opaque colours sharing one edge — no blend band.
+   ------------------------------------------------------------------------- */
+.preloader__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
+}
+
+.preloader__bg--lime {
+    background-color: var(--preloader-lime);
+    clip-path: polygon(
+        calc(50% + 13.4vh) 0%,
+        100% 0%,
+        100% 100%,
+        calc(50% - 13.4vh) 100%
+    );
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+    animation: preloader-lime-in 900ms var(--preloader-ease-out) 80ms forwards;
+}
+
+@keyframes preloader-lime-in {
+    to {
+        opacity: 1;
+    }
+}
+
+/* -------------------------------------------------------------------------
+   Centred logo column
+   ------------------------------------------------------------------------- */
+.preloader__inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    padding: clamp(24px, 5vw, 48px);
+}
+
+/* -------------------------------------------------------------------------
+   Logo block — single SVG, solid white fills (original asset colours).
+   ------------------------------------------------------------------------- */
+.preloader__logo {
+    position: relative;
+    display: block;
+    width: clamp(200px, 30vw, 360px);
+    aspect-ratio: 595 / 272;
+    opacity: 0;
+    transform: translate3d(0, 16px, 0) scale(0.86);
+    transform-origin: center;
+    animation:
+        preloader-logo-in 1200ms var(--preloader-ease-out) 220ms forwards,
+        preloader-logo-pulse 5s ease-in-out 1500ms infinite;
+    filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.18));
+    will-change: transform, opacity;
+}
+
+.preloader__logo-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    shape-rendering: geometricPrecision;
+}
+
+@keyframes preloader-logo-in {
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+@keyframes preloader-logo-pulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.012);
+    }
+}
+
+/* -------------------------------------------------------------------------
+   Reduced motion — collapse everything to a calm fade.
+   ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    .preloader__bg--lime,
+    .preloader__logo {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        animation-delay: 0ms !important;
+        opacity: 1;
+        transform: none;
+    }
+    .preloader.is-hidden {
+        transform: none;
+    }
+}

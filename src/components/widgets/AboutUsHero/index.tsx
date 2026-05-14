@@ -11,7 +11,7 @@ import { Link } from '@/lib/router';
 export const AboutUsHero = () => {
     return (
         <section className="relative h-[calc(100vh-80px)] min-h-0 w-full overflow-hidden bg-onlan-white/90 py-12 md:py-16 lg:py-20">
-            <div className="relative z-10 container mx-auto flex flex-col items-center justify-center gap-10 px-4">
+            <div className="relative z-10 container mx-auto flex flex-col items-center justify-center gap-30 px-4">
                 <div className="flex w-full max-w-[1200px] justify-between items-center">
                     {/* Left — same layout as before: centered column, staggered rows */}
                     <div className="flex flex-col w-full max-w-[700px] items-center">

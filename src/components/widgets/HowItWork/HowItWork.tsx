@@ -12,7 +12,7 @@ const SLIDE_EASE = 'cubic-bezier(0.25, 0.46, 0.45, 0.94)';
 const PANEL_BG = '#2D368B';
 
 export function HowItWork(props: HowItWorkProps) {
-    const { index, total, number, title, description, tagLabel, iconId, slug } = props;
+    const { index, total, number, title, description, iconId, slug, backgroundImageSrc } = props;
     const serviceHref = `/services/${slug}`;
     const listRef = useRef<HTMLDivElement>(null);
     const indicatorRef = useRef<HTMLDivElement>(null);
@@ -63,10 +63,16 @@ export function HowItWork(props: HowItWorkProps) {
             }}
             aria-labelledby={`service-step-title-${index}`}
         >
-            <div
-                className="flex min-h-dvh w-full flex-col justify-center"
-                style={{ backgroundColor: PANEL_BG }}
-            >
+            {/* Photo background + single brand scrim for readable type */}
+            <div className="pointer-events-none absolute inset-0" aria-hidden>
+                <div
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${backgroundImageSrc})` }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#2D368B]/93 from-[8%] via-[#2D368B]/72 via-[42%] to-[#1a2058]/82" />
+            </div>
+
+            <div className="relative z-[1] flex min-h-dvh w-full flex-col justify-center">
                 <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-8 px-4 pb-12 pt-4 sm:px-6 sm:pb-14 md:gap-10">
                     <div className="flex flex-col gap-10 md:flex-row md:items-center md:justify-between md:gap-12 lg:gap-16">
                         <div

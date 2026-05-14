@@ -59,7 +59,6 @@ function ChevronIcon({ dir }: { dir: 'left' | 'right' }) {
 export function Reviews() {
     const [index, setIndex] = useState(0);
     const total = REVIEWS.length;
-    const current = REVIEWS[index]!;
 
     const goPrev = useCallback(() => {
         setIndex((i) => (i - 1 + total) % total);
@@ -70,7 +69,7 @@ export function Reviews() {
     }, [total]);
 
     return (
-        <section className="relative isolate w-full overflow-visible py-10 md:py-14 lg:py-20" aria-labelledby="reviews-heading">
+        <section className="relative isolate w-full overflow-visible py-10 md:py-14 lg:py-30" aria-labelledby="reviews-heading">
             <div
                 className="pointer-events-none absolute inset-0 z-0 flex select-none items-end justify-start"
                 aria-hidden
@@ -109,30 +108,49 @@ export function Reviews() {
                         </span>
 
                         <div className="min-w-0 flex-1">
-                            <blockquote className="border-none p-0">
-                                <p
-                                    key={current.text}
-                                    className="text-base font-medium leading-relaxed text-onlan-black md:text-lg"
-                                >
-                                    {current.text}
-                                </p>
-                            </blockquote>
+                            {/* Grid: all slides share one cell so row height = tallest review (no layout jump). */}
+                            <div className="grid grid-cols-1">
+                                {REVIEWS.map((review, i) => {
+                                    const isActive = i === index;
+                                    return (
+                                        <div
+                                            key={review.text}
+                                            className={`col-start-1 row-start-1 ${
+                                                isActive
+                                                    ? 'relative z-10'
+                                                    : 'invisible pointer-events-none z-0'
+                                            }`}
+                                            aria-hidden={!isActive}
+                                        >
+                                            <blockquote className="border-none p-0">
+                                                <p className="text-base font-medium leading-relaxed text-onlan-black md:text-lg">
+                                                    {review.text}
+                                                </p>
+                                            </blockquote>
 
-                            <div className="mt-8 flex items-center gap-4">
-                                <div className="relative size-14 shrink-0 overflow-hidden rounded-full border border-onlan-lavender bg-onlan-lavender/30 md:size-16">
-                                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img
-                                        src={current.imageSrc}
-                                        alt=""
-                                        width={64}
-                                        height={64}
-                                        className="size-full object-cover"
-                                    />
-                                </div>
-                                <div className="min-w-0">
-                                    <p className="text-lg font-bold text-onlan-black md:text-xl">{current.name}</p>
-                                    <p className="mt-0.5 text-sm text-onlan-blue md:text-base">{current.role}</p>
-                                </div>
+                                            <div className="mt-8 flex items-center gap-4">
+                                                <div className="relative size-14 shrink-0 overflow-hidden rounded-full border border-onlan-lavender bg-onlan-lavender/30 md:size-16">
+                                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                                    <img
+                                                        src={review.imageSrc}
+                                                        alt=""
+                                                        width={64}
+                                                        height={64}
+                                                        className="size-full object-cover"
+                                                    />
+                                                </div>
+                                                <div className="min-w-0">
+                                                    <p className="text-lg font-bold text-onlan-black md:text-xl">
+                                                        {review.name}
+                                                    </p>
+                                                    <p className="mt-0.5 text-sm text-onlan-blue md:text-base">
+                                                        {review.role}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
                             </div>
 
                             <div className="mt-8 flex items-center gap-3">

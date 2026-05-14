@@ -70,6 +70,19 @@ function CustomsIcon() {
     );
 }
 
+function MultimodalIcon() {
+    return (
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" className="h-full w-full text-onlan-lime" aria-hidden>
+            <path d="M6 50h52" {...stroke} strokeLinecap="round" />
+            <rect x="8" y="34" width="22" height="12" rx="2" {...stroke} />
+            <circle cx="14" cy="48" r="3" {...stroke} />
+            <circle cx="24" cy="48" r="3" {...stroke} />
+            <path d="M34 18l6 12h12l-6 14H34l-4-12 4-14z" {...stroke} strokeLinejoin="round" />
+            <path d="M40 6l4 8h-8l4-8z" {...stroke} strokeLinejoin="round" />
+        </svg>
+    );
+}
+
 const MAP: Record<ServiceIconId, ReactNode> = {
     truck: <TruckIcon />,
     ship: <ShipIcon />,
@@ -77,6 +90,7 @@ const MAP: Record<ServiceIconId, ReactNode> = {
     train: <TrainIcon />,
     oversize: <OversizeIcon />,
     customs: <CustomsIcon />,
+    multimodal: <MultimodalIcon />,
 };
 
 export function ServiceIconVisual({ id }: { id: ServiceIconId }) {

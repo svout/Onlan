@@ -1,5 +1,6 @@
 import { HOW_IT_WORKS_SERVICES } from '@/components/widgets/HowItWork/howItWorksData';
 import { HowItWork } from '@/components/widgets/HowItWork/HowItWork';
+import { SERVICE_STEP_BACKGROUND_BY_SLUG } from '@/components/widgets/ServicesHowItWorksSection/serviceStepBackgrounds';
 
 /**
  * Sticky stack: each service is `sticky top-0 min-h-dvh` with rising z-index so the next
@@ -11,7 +12,13 @@ export function ServicesHowItWorksSection() {
     return (
         <div className="relative w-full">
             {HOW_IT_WORKS_SERVICES.map((item, index) => (
-                <HowItWork key={item.number} {...item} index={index} total={total} />
+                <HowItWork
+                    key={item.number}
+                    {...item}
+                    index={index}
+                    total={total}
+                    backgroundImageSrc={SERVICE_STEP_BACKGROUND_BY_SLUG[item.slug]}
+                />
             ))}
         </div>
     );
