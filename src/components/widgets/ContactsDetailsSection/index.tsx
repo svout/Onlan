@@ -36,23 +36,27 @@ export function ContactsDetailsSection() {
                             </h3>
 
                             <ul className="mt-5 space-y-4">
-                                {column.items.map((item, index) => (
-                                    <li
-                                        key={`${column.title}-${item.href ?? item.label}-${index}`}
-                                        className="text-sm leading-relaxed text-onlan-black/85 md:text-base"
-                                    >
-                                        {item.href ? (
-                                            <a
-                                                href={item.href}
-                                                className="transition-colors hover:text-onlan-blue hover:underline"
-                                            >
-                                                {item.label}
-                                            </a>
-                                        ) : (
-                                            item.label
-                                        )}
-                                    </li>
-                                ))}
+                                {column.items.map((item, index) => {
+                                    const href = 'href' in item ? item.href : undefined;
+
+                                    return (
+                                        <li
+                                            key={`${column.title}-${href ?? item.label}-${index}`}
+                                            className="text-sm leading-relaxed text-onlan-black/85 md:text-base"
+                                        >
+                                            {href ? (
+                                                <a
+                                                    href={href}
+                                                    className="transition-colors hover:text-onlan-blue hover:underline"
+                                                >
+                                                    {item.label}
+                                                </a>
+                                            ) : (
+                                                item.label
+                                            )}
+                                        </li>
+                                    );
+                                })}
                             </ul>
                         </article>
                     ))}
