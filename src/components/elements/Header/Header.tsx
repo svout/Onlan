@@ -9,31 +9,60 @@ import menuIcon from '@/assets/icons/menu.svg';
 import closeIcon from '@/assets/icons/close.svg';
 import OnlanLogo from '@/assets/icons/Onlan.svg';
 import { SERVICES } from '@/content/services';
+import { useViewportMode } from '@/hooks/useViewportMode';
 
 const SCROLL_TOP_THRESHOLD = 56;
 const SCROLL_DIRECTION_DELTA = 8;
 
-function LangSwitchPlaceholder() {
+type SiteLang = 'UA' | 'EN';
+
+const langButtonClass =
+    'min-w-11 rounded-md px-2 py-2 text-sm text-onlan-black transition-colors';
+
+function LangSwitch() {
+    const [lang, setLang] = useState<SiteLang>('UA');
+    const otherLang: SiteLang = lang === 'UA' ? 'EN' : 'UA';
+
     return (
-        <div
-            className="flex items-center gap-2"
-            role="group"
-            aria-label="Site language"
-        >
+        <>
+            {/* Tablet + narrow desktop: one label, click toggles language */}
             <button
                 type="button"
-                className="min-w-11 rounded-md px-2 py-2 text-sm font-semibold text-onlan-black"
-                aria-current="true"
+                className={`${langButtonClass} font-semibold xl:hidden`}
+                aria-label={`Мова: ${lang}. Натисніть, щоб перемкнути на ${otherLang}`}
+                onClick={() => setLang(otherLang)}
             >
-                UA
+                {lang}
             </button>
-            <button
-                type="button"
-                className="min-w-11 rounded-md px-2 py-2 text-sm font-medium text-onlan-black "
+
+            {/* Wide desktop: both options visible */}
+            <div
+                className="hidden items-center gap-2 xl:flex"
+                role="group"
+                aria-label="Мова сайту"
             >
-                EN
-            </button>
-        </div>
+                <button
+                    type="button"
+                    className={`${langButtonClass} ${
+                        lang === 'UA' ? 'font-semibold' : 'font-medium'
+                    }`}
+                    aria-current={lang === 'UA' ? 'true' : undefined}
+                    onClick={() => setLang('UA')}
+                >
+                    UA
+                </button>
+                <button
+                    type="button"
+                    className={`${langButtonClass} ${
+                        lang === 'EN' ? 'font-semibold' : 'font-medium'
+                    }`}
+                    aria-current={lang === 'EN' ? 'true' : undefined}
+                    onClick={() => setLang('EN')}
+                >
+                    EN
+                </button>
+            </div>
+        </>
     );
 }
 
@@ -84,7 +113,7 @@ function ServicesDropdown({ onNavigate }: { onNavigate?: () => void }) {
     return (
         <div
             ref={wrapperRef}
-            className="relative"
+            className="relative shrink-0"
             onMouseEnter={openWithDelay}
             onMouseLeave={closeWithDelay}
             onFocus={openWithDelay}
@@ -92,7 +121,7 @@ function ServicesDropdown({ onNavigate }: { onNavigate?: () => void }) {
         >
             <button
                 type="button"
-                className={`flex items-center gap-1 px-3 py-2 uppercase text-onlan-blue transition-all rounded-lg hover:text-onlan-black ${
+                className={`flex shrink-0 items-center gap-1 whitespace-nowrap px-2 py-2 uppercase text-onlan-blue transition-all rounded-lg hover:text-onlan-black lg:px-3 ${
                     isOnServicesPage ? 'text-onlan-black' : ''
                 }`}
                 aria-haspopup="true"
@@ -224,6 +253,7 @@ function MobileServicesGroup({ onClose }: { onClose: () => void }) {
 }
 
 export function Header() {
+    const viewportMode = useViewportMode();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [headerBarVisible, setHeaderBarVisible] = useState(true);
     const [spacerHeight, setSpacerHeight] = useState(96);
@@ -255,6 +285,12 @@ export function Header() {
         ro.observe(el);
         return () => ro.disconnect();
     }, [isMenuOpen]);
+
+    useEffect(() => {
+        if (viewportMode !== 'mobile' && isMenuOpen) {
+            setIsMenuOpen(false);
+        }
+    }, [viewportMode, isMenuOpen]);
 
     useEffect(() => {
         if (prefersReducedMotion.current || isMenuOpen) {
@@ -322,77 +358,88 @@ export function Header() {
                     headerHidden ? '-translate-y-full pointer-events-none' : 'translate-y-0'
                 }`}
             >
-            <nav className="container mx-auto px-4 py-6">
-                <div className="relative flex items-center justify-between">
+            <nav className="container mx-auto px-4 py-4 md:py-5 lg:py-6">
+                {/* Mobile: logo + burger */}
+                <div className="flex items-center justify-between md:hidden">
                     <Link
                         to="/"
-                        className="relative z-10 shrink-0 text-xl font-bold"
+                        className="shrink-0 text-xl font-bold"
                         onClick={closeMenu}
                     >
-                        <Icon src={OnlanLogo} className="h-12 w-12" />
+                        <Icon src={OnlanLogo} className="h-10 w-10" />
                     </Link>
-
-                    {/* Desktop / tablet: centered in container (independent of logo / CTA width) */}
-                    <div className="pointer-events-none absolute inset-0 hidden items-center justify-center md:flex">
-                        <nav
-                            className="pointer-events-auto flex items-center gap-6"
-                            aria-label="Основна навігація"
-                        >
-                            <Link
-                                to="/"
-                                className="px-3 py-2 uppercase text-onlan-blue transition-all rounded-lg hover:text-onlan-black"
-                            >
-                                Головна
-                            </Link>
-                            <Link
-                                to="/about-us"
-                                className="px-3 py-2 uppercase text-onlan-blue transition-all rounded-lg hover:text-onlan-black"
-                            >
-                                Про Нас
-                            </Link>
-                            <ServicesDropdown />
-                            <Link
-                                to="/"
-                                className="px-3 py-2 uppercase text-onlan-blue transition-all rounded-lg hover:text-onlan-black"
-                            >
-                                Контакти
-                            </Link>
-                        </nav>
-                    </div>
-
-                    {/* Tablet: CTA + language (visual only) */}
-                    <div className="relative z-10 hidden items-center gap-3 md:flex lg:hidden">
-                        <Link to="/">
-                            <Button variant="primary" type="button" size="md">
-                                Зв&apos;язатись з нами
-                            </Button>
-                        </Link>
-                        <LangSwitchPlaceholder />
-                    </div>
-
-                    {/* Desktop: CTA + language (visual only) */}
-                    <div className="relative z-10 hidden items-center gap-3 lg:flex">
-                        <Link to="/">
-                            <Button variant="primary" type="button" size="md">
-                                Зв&apos;язатись з нами
-                            </Button>
-                        </Link>
-                        <LangSwitchPlaceholder />
-                    </div>
-
-                    {/* Mobile Burger Button */}
                     <button
                         onClick={toggleMenu}
-                        className="relative z-10 md:hidden p-2 text-onlan-blue hover:text-blue-600 transition-colors border-onlan-lavender border rounded-lg"
+                        className="shrink-0 p-2 text-onlan-blue transition-colors border border-onlan-lavender rounded-lg hover:text-blue-600"
                         aria-label="Toggle menu"
+                        aria-expanded={isMenuOpen}
                     >
                         <Icon src={isMenuOpen ? closeIcon : menuIcon} className="size-6" />
                     </button>
                 </div>
 
-                {/* Mobile Menu */}
+                {/* Tablet + desktop: equal side columns keep center nav from overlapping logo/CTA */}
+                <div className="hidden md:grid md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:items-center md:gap-x-4 lg:gap-x-8">
+                    <div className="flex min-w-0 items-center justify-start">
+                        <Link
+                            to="/"
+                            className="shrink-0 text-xl font-bold"
+                            onClick={closeMenu}
+                        >
+                            <Icon
+                                src={OnlanLogo}
+                                className="h-10 w-10 lg:h-12 lg:w-12"
+                            />
+                        </Link>
+                    </div>
+
+                    <nav
+                        className="flex shrink-0 items-center justify-center gap-3 px-2 text-sm uppercase lg:gap-5 lg:px-4 lg:text-base"
+                        aria-label="Основна навігація"
+                    >
+                        <Link
+                            to="/"
+                            className="whitespace-nowrap px-1 py-2 text-onlan-blue transition-all rounded-lg hover:text-onlan-black lg:px-2"
+                        >
+                            Головна
+                        </Link>
+                        <Link
+                            to="/about-us"
+                            className="whitespace-nowrap px-1 py-2 text-onlan-blue transition-all rounded-lg hover:text-onlan-black lg:px-2"
+                        >
+                            Про Нас
+                        </Link>
+                        <ServicesDropdown />
+                            <Link
+                                to="/contacts"
+                                className="whitespace-nowrap px-1 py-2 text-onlan-blue transition-all rounded-lg hover:text-onlan-black lg:px-2"
+                            >
+                                Контакти
+                            </Link>
+                    </nav>
+
+                    <div className="flex min-w-0 items-center justify-end gap-2 lg:gap-3">
+                        <Link to="/" className="shrink-0">
+                            <Button
+                                variant="primary"
+                                type="button"
+                                size={viewportMode === 'tablet' ? 'sm' : 'md'}
+                                className="whitespace-nowrap"
+                            >
+                                {viewportMode === 'desktop'
+                                    ? 'Зв\'язатись з нами'
+                                    : 'Зв\'язок'}
+                            </Button>
+                        </Link>
+                        <div className="shrink-0">
+                            <LangSwitch />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Mobile: collapsible menu */}
                 {isMenuOpen && (
-                    <div className="md:hidden mt-4 pb-5 relative">
+                    <div className="relative mt-4 pb-5 md:hidden">
                         <div className="flex flex-col gap-4 pt-4 mt-[10px] items-center">
                             <Link
                                 to="/"
@@ -413,7 +460,7 @@ export function Header() {
                             <MobileServicesGroup onClose={closeMenu} />
 
                             <Link
-                                to="/"
+                                to="/contacts"
                                 className="px-3 py-2 rounded-lg uppercase transition-all hover:bg-onlan-white hover:text-onlan-blue text-center"
                                 onClick={closeMenu}
                             >
@@ -432,7 +479,7 @@ export function Header() {
                                     </Button>
                                 </Link>
                                 <div className="flex items-center">
-                                    <LangSwitchPlaceholder />
+                                    <LangSwitch />
                                 </div>
                             </div>
                         </div>

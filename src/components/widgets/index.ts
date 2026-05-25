@@ -7,6 +7,12 @@ import { ServicesHowItWorksSection } from './ServicesHowItWorksSection/ServicesH
 import { CompanyHeroSection } from './CompanyHeroSection/CompanyHeroSection';
 import { Reviews } from './Reviews';
 import { ContactUsSection } from './ContactUsSection';
+import { ContactsDetailsSection } from './ContactsDetailsSection';
+import { ContactsFaqSection } from './ContactsFaqSection';
+import { ContactsGlowCardSection } from './ContactsGlowCardSection';
+import { ContactsHeroSection } from './ContactsHeroSection';
+import { ContactsOfficesSection } from './ContactsOfficesSection';
+import { ContactsQuoteFormSection } from './ContactsQuoteFormSection';
 import { RegionsMarqueeSection } from './RegionsMarqueeSection';
 import { AboutUsHero } from './AboutUsHero';
 import { AboutUsCompanyIntro } from './AboutUsCompanyIntro';
@@ -33,6 +39,12 @@ export const Widgets = {
     CompanyHeroSection,
     Reviews,
     ContactUsSection,
+    ContactsDetailsSection,
+    ContactsFaqSection,
+    ContactsGlowCardSection,
+    ContactsHeroSection,
+    ContactsOfficesSection,
+    ContactsQuoteFormSection,
     AboutUsHero,
     AboutUsCompanyIntro,
     AboutUsAdvantagesSection,

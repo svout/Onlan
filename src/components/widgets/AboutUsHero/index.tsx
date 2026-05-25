@@ -78,7 +78,7 @@ export const AboutUsHero = () => {
                         type="medium"
                     />
 
-                    <Link to="/contact" className="flex items-center justify-center gap-1">
+                    <Link to="/contacts" className="flex items-center justify-center gap-1">
                         <Elements.Button variant="lime" size="xl">
                             <span className="text-base uppercase font-semibold md:text-lg lg:text-[19px]">
                                 Дізнатися більше про нас

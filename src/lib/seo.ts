@@ -41,6 +41,13 @@ export const ABOUT_US_SEO: PageSeoConfig = {
     path: '/about',
 };
 
+export const CONTACTS_SEO: PageSeoConfig = {
+    title: 'Контакти | OnLan Logistic',
+    description:
+        'Зв’яжіться з ONLAN Logistic: телефон, email, офіс у Вінниці. Обговоріть доставку та логістику зручним для вас способом.',
+    path: '/contacts',
+};
+
 export function createServiceSeoConfig(service: ServiceContent): PageSeoConfig {
     return {
         title:

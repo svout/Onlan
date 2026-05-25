@@ -23,6 +23,12 @@ const socialIconClass =
 const linkClass =
     'text-onlan-white transition-colors hover:text-onlan-lime focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-onlan-lime';
 
+const sectionTitleClass =
+    'text-lg font-semibold text-onlan-white md:text-xl';
+
+const sectionLinksClass =
+    'mt-4 flex flex-col gap-3 text-sm font-normal md:text-base';
+
 export const Footer = () => {
     const currentYear = new Date().getFullYear();
 
@@ -37,12 +43,13 @@ export const Footer = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-onlan-black/35 to-transparent" />
             </div>
 
-            <div className="relative z-10 container mx-auto w-full px-4 py-12 md:py-16 lg:py-20">
-                <div className="flex min-w-0 flex-col gap-5 lg:flex-row lg:items-start lg:gap-6 xl:gap-8">
-                    <div className="max-w-md shrink-0">
+            <div className="relative z-10 container mx-auto w-full px-4 py-10 md:py-14 lg:py-20">
+                {/* Mobile: stacked · Tablet: brand + 2-col links · Desktop: row + 3-col links */}
+                <div className="flex min-w-0 flex-col gap-10 md:gap-12 lg:flex-row lg:items-start lg:gap-8 xl:gap-10">
+                    <div className="max-w-md shrink-0 md:max-w-none lg:max-w-md">
                         <Link
                             to="/"
-                            className="group block w-full max-w-[min(100%,520px)]"
+                            className="group block w-full max-w-[min(100%,520px)] md:max-w-[420px] lg:max-w-[min(100%,520px)]"
                             onClick={() =>
                                 window.scrollTo({
                                     top: 0,
@@ -59,11 +66,10 @@ export const Footer = () => {
                         <Description
                             description="Міжнародна логістика для бізнесу: доставка з Європи, Китаю та США в Україну. Митниця, страхування та підтримка 24/7."
                             type="small"
-                            className="mt-6 w-full max-w-full text-onlan-white/90"
+                            className="mt-5 w-full max-w-full text-onlan-white/90 md:mt-6"
                         />
 
-
-                        <div className="mt-4 flex items-center gap-4">
+                        <div className="mt-4 flex items-center gap-4 md:mt-5">
                             <a
                                 href={SOCIAL_HREF.instagram}
                                 target="_blank"
@@ -85,10 +91,10 @@ export const Footer = () => {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-3 pl-10">
-                        <nav className="">
-                            <h3 className="text-lg font-semibold text-onlan-white md:text-xl">Навігація</h3>
-                            <div className="mt-4 flex flex-col gap-3 text-sm font-normal md:text-base">
+                    <div className="grid min-w-0 flex-1 grid-cols-1 gap-8 md:grid-cols-2 md:gap-10 lg:grid-cols-3 lg:gap-6 lg:pl-10 xl:gap-8">
+                        <nav>
+                            <h3 className={sectionTitleClass}>Навігація</h3>
+                            <div className={sectionLinksClass}>
                                 <Link to="/" className={linkClass}>
                                     Головна
                                 </Link>
@@ -98,7 +104,7 @@ export const Footer = () => {
                                 <Link to="/" className={linkClass}>
                                     Сервіси
                                 </Link>
-                                <Link to="/" className={linkClass}>
+                                <Link to="/contacts" className={linkClass}>
                                     Контакти
                                 </Link>
                                 <Link to="/" className={linkClass}>
@@ -107,9 +113,9 @@ export const Footer = () => {
                             </div>
                         </nav>
 
-                        <nav className="">
-                            <h3 className="text-lg font-semibold text-onlan-white md:text-xl">Юридична інформація</h3>
-                            <div className="mt-4 flex flex-col gap-3 text-sm font-normal md:text-base">
+                        <nav>
+                            <h3 className={sectionTitleClass}>Юридична інформація</h3>
+                            <div className={sectionLinksClass}>
                                 <Link to="/" className={linkClass}>
                                     Політика конфіденційності
                                 </Link>
@@ -119,37 +125,47 @@ export const Footer = () => {
                             </div>
                         </nav>
 
-                        <address className="not-italic min-w-0 max-w-full">
-                            <h4 className="text-lg font-semibold text-onlan-white md:text-xl">Контакти</h4>
-                            <div className="mt-4 flex min-w-0 max-w-full flex-col gap-3 text-sm font-normal not-italic text-onlan-white/90 md:text-base">
+                        <address className="not-italic min-w-0 max-w-full md:col-span-2 lg:col-span-1">
+                            <h4 className={sectionTitleClass}>Контакти</h4>
+                            <div
+                                className={`${sectionLinksClass} not-italic text-onlan-white/90`}
+                            >
                                 <p className="min-w-0 wrap-break-word">{CONTACT.location}</p>
                                 <a
                                     href={`mailto:${CONTACT.email}`}
                                     className={`${linkClass} flex min-w-0 max-w-full items-center gap-2 overflow-x-auto`}
                                     title={CONTACT.email}
                                 >
-                                    <FaEnvelope className="size-4 shrink-0 text-onlan-lime" aria-hidden />
+                                    <FaEnvelope
+                                        className="size-4 shrink-0 text-onlan-lime"
+                                        aria-hidden
+                                    />
                                     <span className="whitespace-nowrap">{CONTACT.email}</span>
                                 </a>
                                 <a
                                     href={`tel:${CONTACT.phoneTel}`}
                                     className={`${linkClass} flex min-w-0 max-w-full items-start gap-2`}
                                 >
-                                    <FaPhone className="mt-0.5 size-4 shrink-0 text-onlan-lime" aria-hidden />
-                                    <span className="min-w-0 wrap-break-word">{CONTACT.phoneDisplay}</span>
+                                    <FaPhone
+                                        className="mt-0.5 size-4 shrink-0 text-onlan-lime"
+                                        aria-hidden
+                                    />
+                                    <span className="min-w-0 wrap-break-word">
+                                        {CONTACT.phoneDisplay}
+                                    </span>
                                 </a>
                             </div>
                         </address>
                     </div>
                 </div>
 
-                <div className="mt-8 h-px w-full bg-white/20 md:mt-8" />
+                <div className="mt-8 h-px w-full bg-white/20 md:mt-10 lg:mt-12" />
 
-                <div className="mt-8 flex flex-col gap-4 text-sm leading-snug text-white/70 md:mt-10 md:flex-row md:items-center md:justify-between md:text-base">
+                <div className="mt-6 flex flex-col gap-4 text-sm leading-snug text-white/70 md:mt-8 md:flex-row md:items-center md:justify-between md:text-base lg:mt-10">
                     <p className="text-center md:text-left">
                         © {currentYear} ONLAN. Усі права захищені.
                     </p>
-                    <div className="flex items-center justify-between gap-6 md:justify-end">
+                    <div className="flex items-center justify-center gap-6 md:justify-end">
                         <Link to="/" className={`${linkClass} text-center text-sm md:text-base`}>
                             Конфіденційність
                         </Link>
