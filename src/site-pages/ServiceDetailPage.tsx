@@ -1,7 +1,7 @@
 'use client';
 
 import type { ServiceContent } from '@/types/Service.interface';
-import { Widgets } from '@/components/widgets';
+import { Containers, Widgets } from '@components';
 
 type Props = {
     service: ServiceContent;
@@ -15,7 +15,9 @@ export default function ServiceDetailPage({ service }: Props) {
             <Widgets.ServiceProcess service={service} />
             <Widgets.ServiceCargoTypes service={service} />
             <Widgets.ServiceFaq service={service} />
-            <Widgets.ContactUsSection />
+            <div className="bg-onlan-white">
+                <Containers.Section el={<Widgets.ContactsGlowCardSection />} />
+            </div>
         </>
     );
 }

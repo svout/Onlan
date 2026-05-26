@@ -1,12 +1,68 @@
 'use client';
 
-import Image from 'next/image';
-import advantageIcon from '@/assets/icons/AboutUsAdvantageIcon.svg';
+import { useEffect, useRef, useState } from 'react';
 import { Elements } from '@/components/elements';
 import type { ServiceContent } from '@/types/Service.interface';
 
 interface ServiceBenefitsProps {
     service: ServiceContent;
+}
+
+type BenefitStoryItemProps = {
+    title: string;
+    description: string;
+};
+
+function BenefitStoryItem({ title, description }: BenefitStoryItemProps) {
+    const itemRef = useRef<HTMLLIElement>(null);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const node = itemRef.current;
+        if (!node) {
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.unobserve(entry.target);
+                }
+            },
+            { threshold: 0.2, rootMargin: '0px 0px -10% 0px' },
+        );
+
+        observer.observe(node);
+
+        return () => observer.disconnect();
+    }, []);
+
+    return (
+        <li ref={itemRef} className="border-t border-onlan-black/10 py-6 md:py-8 lg:py-10">
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-10">
+                <h3
+                    className="text-xl font-semibold leading-snug text-onlan-black transition-all duration-700 lg:text-2xl"
+                    style={{
+                        opacity: isVisible ? 1 : 0,
+                        transform: isVisible ? 'translateY(0)' : 'translateY(28px)',
+                    }}
+                >
+                    {title}
+                </h3>
+
+                <p
+                    className="max-w-3xl text-sm leading-relaxed text-onlan-black/85 transition-all duration-700 delay-100 md:text-base lg:text-lg"
+                    style={{
+                        opacity: isVisible ? 1 : 0,
+                        transform: isVisible ? 'translateY(0)' : 'translateY(28px)',
+                    }}
+                >
+                    {description}
+                </p>
+            </div>
+        </li>
+    );
 }
 
 export const ServiceBenefits = ({ service }: ServiceBenefitsProps) => {
@@ -38,30 +94,13 @@ export const ServiceBenefits = ({ service }: ServiceBenefitsProps) => {
                     className="mt-4 max-w-3xl text-balance text-2xl text-onlan-black md:mt-6 md:text-3xl lg:mt-8 lg:text-4xl"
                 />
 
-                <ul className="mx-auto mt-8 grid w-full list-none grid-cols-1 gap-4 md:mt-10 md:grid-cols-2 md:gap-5 lg:mt-12 lg:grid-cols-3 lg:gap-6 xl:gap-8">
+                <ul className="mx-auto mt-8 w-full list-none border-b border-onlan-black/10 md:mt-10 lg:mt-12">
                     {service.benefits.map((item) => (
-                        <li key={item.title}>
-                            <article className="relative h-full rounded-xl border border-onlan-black/10 bg-onlan-white p-5 shadow-[0_8px_30px_rgba(0,0,0,0.06)] md:rounded-2xl md:p-6 lg:p-8">
-                                <div
-                                    className="pointer-events-none absolute right-3 top-3 md:right-4 md:top-4 lg:right-5 lg:top-5"
-                                    aria-hidden
-                                >
-                                    <Image
-                                        src={advantageIcon}
-                                        alt=""
-                                        width={46}
-                                        height={46}
-                                        className="size-9 md:size-10 lg:size-[46px]"
-                                    />
-                                </div>
-                                <h3 className="pr-11 text-base font-semibold leading-snug text-onlan-black md:pr-12 md:text-lg lg:pr-14 lg:text-xl">
-                                    {item.title}
-                                </h3>
-                                <p className="mt-2 text-sm leading-relaxed text-onlan-black/85 md:mt-3 md:text-base">
-                                    {item.description}
-                                </p>
-                            </article>
-                        </li>
+                        <BenefitStoryItem
+                            key={item.title}
+                            title={item.title}
+                            description={item.description}
+                        />
                     ))}
                 </ul>
             </div>

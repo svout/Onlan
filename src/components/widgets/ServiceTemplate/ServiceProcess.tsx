@@ -1,10 +1,69 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import { Elements } from '@/components/elements';
 import type { ServiceContent } from '@/types/Service.interface';
 
 interface ServiceProcessProps {
     service: ServiceContent;
+}
+
+type ProcessStepItemProps = {
+    number: string;
+    title: string;
+    description: string;
+    index: number;
+};
+
+function ProcessStepItem({ number, title, description, index }: ProcessStepItemProps) {
+    const itemRef = useRef<HTMLLIElement>(null);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const node = itemRef.current;
+        if (!node) {
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.unobserve(entry.target);
+                }
+            },
+            { threshold: 0.2, rootMargin: '0px 0px -10% 0px' },
+        );
+
+        observer.observe(node);
+
+        return () => observer.disconnect();
+    }, []);
+
+    return (
+        <li
+            ref={itemRef}
+            className="relative flex h-full flex-col rounded-2xl border border-onlan-black/10 bg-onlan-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-700 md:p-7"
+            style={{
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? 'translateY(0)' : 'translateY(32px)',
+                transitionDelay: `${index * 90}ms`,
+            }}
+        >
+            <span
+                className="select-none font-bold tabular-nums leading-none text-onlan-blue text-[64px] md:text-[80px]"
+                aria-hidden
+            >
+                {number}
+            </span>
+            <h3 className="mt-4 text-lg font-semibold leading-snug text-onlan-black md:text-xl">
+                {title}
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-onlan-black/80 md:text-base">
+                {description}
+            </p>
+        </li>
+    );
 }
 
 export const ServiceProcess = ({ service }: ServiceProcessProps) => {
@@ -37,24 +96,14 @@ export const ServiceProcess = ({ service }: ServiceProcessProps) => {
                 />
 
                 <ol className="mt-10 grid grid-cols-1 gap-5 md:mt-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-                    {service.process.map((step) => (
-                        <li
+                    {service.process.map((step, index) => (
+                        <ProcessStepItem
                             key={step.number}
-                            className="relative flex h-full flex-col rounded-2xl border border-onlan-black/10 bg-onlan-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.06)] md:p-7"
-                        >
-                            <span
-                                className="select-none font-bold tabular-nums leading-none text-onlan-blue text-[64px] md:text-[80px]"
-                                aria-hidden
-                            >
-                                {step.number}
-                            </span>
-                            <h3 className="mt-4 text-lg font-semibold leading-snug text-onlan-black md:text-xl">
-                                {step.title}
-                            </h3>
-                            <p className="mt-2 text-sm leading-relaxed text-onlan-black/80 md:text-base">
-                                {step.description}
-                            </p>
-                        </li>
+                            number={step.number}
+                            title={step.title}
+                            description={step.description}
+                            index={index}
+                        />
                     ))}
                 </ol>
             </div>

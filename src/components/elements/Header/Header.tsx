@@ -152,9 +152,9 @@ function ServicesDropdown({ onNavigate }: { onNavigate?: () => void }) {
                 <div
                     role="menu"
                     aria-label="Сервіси"
-                    className="absolute left-1/2 top-full z-50 mt-2 w-[min(96vw,520px)] -translate-x-1/2 rounded-2xl border border-onlan-black/10 bg-onlan-white p-2 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.18)]"
+                    className="absolute left-1/2 top-full z-50 mt-2.5 w-[min(92vw,420px)] -translate-x-1/2 rounded-2xl border border-onlan-black/8 bg-onlan-white/96 p-1.5 shadow-[0_24px_48px_-16px_rgba(0,0,0,0.2)] backdrop-blur-md"
                 >
-                    <ul className="flex flex-col">
+                    <ul className="flex flex-col gap-0.5">
                         {SERVICES.map((service) => {
                             const href = `/services/${service.slug}`;
                             const isActive = pathname === href;
@@ -167,20 +167,26 @@ function ServicesDropdown({ onNavigate }: { onNavigate?: () => void }) {
                                             setIsOpen(false);
                                             onNavigate?.();
                                         }}
-                                        className={`flex items-start gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-onlan-lavender/40 ${
-                                            isActive ? 'bg-onlan-lavender/40' : ''
+                                        className={`group flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all hover:bg-onlan-lavender/35 ${
+                                            isActive ? 'bg-onlan-lavender/35' : ''
                                         }`}
                                     >
-                                        <span className="mt-0.5 inline-flex size-7 shrink-0 items-center justify-center rounded-md bg-onlan-blue text-[11px] font-bold text-onlan-lime">
+                                        <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-onlan-lime text-[11px] font-bold text-onlan-blue">
                                             {service.number}
                                         </span>
                                         <span className="min-w-0 flex-1">
-                                            <span className="block text-sm font-semibold text-onlan-black md:text-base">
+                                            <span className="block truncate text-sm font-semibold text-onlan-black">
                                                 {service.title}
                                             </span>
-                                            <span className="mt-0.5 block text-xs font-medium uppercase tracking-wide text-onlan-blue">
+                                            <span className="mt-0.5 block truncate text-[11px] font-medium uppercase tracking-[0.12em] text-onlan-blue/75">
                                                 {service.tagLabel}
                                             </span>
+                                        </span>
+                                        <span
+                                            aria-hidden
+                                            className="text-sm text-onlan-blue/45 transition-transform group-hover:translate-x-0.5"
+                                        >
+                                            →
                                         </span>
                                     </Link>
                                 </li>
@@ -195,6 +201,7 @@ function ServicesDropdown({ onNavigate }: { onNavigate?: () => void }) {
 
 function MobileServicesGroup({ onClose }: { onClose: () => void }) {
     const [isOpen, setIsOpen] = useState(false);
+    const pathname = usePathname();
 
     return (
         <div className="flex w-full flex-col items-center">
@@ -224,28 +231,38 @@ function MobileServicesGroup({ onClose }: { onClose: () => void }) {
                 </svg>
             </button>
             {isOpen && (
-                <ul className="mt-2 flex w-full max-w-sm flex-col gap-1 rounded-xl border border-onlan-black/10 bg-onlan-white p-2">
-                    {SERVICES.map((service) => (
-                        <li key={service.slug}>
-                            <Link
-                                to={`/services/${service.slug}`}
-                                onClick={onClose}
-                                className="flex items-start gap-3 rounded-lg px-3 py-2.5 hover:bg-onlan-lavender/40"
-                            >
-                                <span className="mt-0.5 inline-flex size-7 shrink-0 items-center justify-center rounded-md bg-onlan-blue text-[11px] font-bold text-onlan-lime">
-                                    {service.number}
-                                </span>
-                                <span className="min-w-0 flex-1 text-left">
-                                    <span className="block text-sm font-semibold text-onlan-black">
-                                        {service.title}
+                <ul className="mt-2 flex w-full max-w-sm flex-col gap-0.5 rounded-2xl border border-onlan-black/8 bg-onlan-white/96 p-1.5 shadow-[0_18px_40px_-18px_rgba(0,0,0,0.18)] backdrop-blur-md">
+                    {SERVICES.map((service) => {
+                        const href = `/services/${service.slug}`;
+                        const isActive = pathname === href;
+
+                        return (
+                            <li key={service.slug}>
+                                <Link
+                                    to={href}
+                                    onClick={onClose}
+                                    className={`flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all hover:bg-onlan-lavender/35 ${
+                                        isActive ? 'bg-onlan-lavender/35' : ''
+                                    }`}
+                                >
+                                    <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-onlan-lime text-[11px] font-bold text-onlan-blue">
+                                        {service.number}
                                     </span>
-                                    <span className="mt-0.5 block text-[11px] font-medium uppercase tracking-wide text-onlan-blue">
-                                        {service.tagLabel}
+                                    <span className="min-w-0 flex-1 text-left">
+                                        <span className="block truncate text-sm font-semibold text-onlan-black">
+                                            {service.title}
+                                        </span>
+                                        <span className="mt-0.5 block truncate text-[11px] font-medium uppercase tracking-[0.12em] text-onlan-blue/75">
+                                            {service.tagLabel}
+                                        </span>
                                     </span>
-                                </span>
-                            </Link>
-                        </li>
-                    ))}
+                                    <span aria-hidden className="text-sm text-onlan-blue/45">
+                                        →
+                                    </span>
+                                </Link>
+                            </li>
+                        );
+                    })}
                 </ul>
             )}
         </div>
