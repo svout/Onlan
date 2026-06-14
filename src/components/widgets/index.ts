@@ -21,6 +21,11 @@ import { AboutUsHistorySection } from './AboutUsHistorySection';
 import { AboutUsTeamSection } from './AboutUsTeamSection';
 import { AboutUsValuesSection } from './AboutUsValuesSection';
 import {
+    AboutUsStorytellMapSection,
+    AboutUsStorytellScrollSection,
+    AboutUsStorytellSplitSection,
+} from './AboutUsStorytell';
+import {
     ServiceHero,
     ServiceBenefits,
     ServiceProcess,
@@ -51,6 +56,9 @@ export const Widgets = {
     AboutUsValuesSection,
     AboutUsTeamSection,
     AboutUsHistorySection,
+    AboutUsStorytellScrollSection,
+    AboutUsStorytellSplitSection,
+    AboutUsStorytellMapSection,
     ServiceHero,
     ServiceBenefits,
     ServiceProcess,
