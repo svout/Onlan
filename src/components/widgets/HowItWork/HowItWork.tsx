@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { Link } from 'react-router';
 import type { HowItWorkProps } from '@/types/HowItWorks.interface';
-import { ServiceIconVisual } from './ServiceIcons';
 
 /** Easing from reference: cubic-bezier(0.25, 0.46, 0.45, 0.94) */
 const SLIDE_EASE = 'cubic-bezier(0.25, 0.46, 0.45, 0.94)';
@@ -12,7 +12,8 @@ const SLIDE_EASE = 'cubic-bezier(0.25, 0.46, 0.45, 0.94)';
 const PANEL_BG = '#2D368B';
 
 export function HowItWork(props: HowItWorkProps) {
-    const { index, total, number, title, description, iconId, slug, backgroundImageSrc } = props;
+    const { index, total, number, title, description, slug, backgroundImageSrc, panelImageSrc } =
+        props;
     const serviceHref = `/services/${slug}`;
     const listRef = useRef<HTMLDivElement>(null);
     const indicatorRef = useRef<HTMLDivElement>(null);
@@ -73,7 +74,7 @@ export function HowItWork(props: HowItWorkProps) {
             </div>
 
             <div className="relative z-[1] flex min-h-dvh w-full flex-col justify-center">
-                <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-8 px-4 pb-12 pt-4 sm:px-6 sm:pb-14 md:gap-10">
+                <div className="container mx-auto flex w-full flex-col gap-8 px-4 pb-12 pt-4 sm:pb-14 md:gap-10">
                     <div className="flex flex-col gap-10 md:flex-row md:items-center md:justify-between md:gap-12 lg:gap-16">
                         <div
                             className="flex w-full flex-col md:w-[42%]"
@@ -137,8 +138,18 @@ export function HowItWork(props: HowItWorkProps) {
                                 opacity: isVisible ? 1 : 0,
                             }}
                         >
-                            <div className="relative flex aspect-[597/543] w-full max-w-[min(100%,520px)] items-center justify-center rounded-[20px] border border-onlan-lime/25 bg-gradient-to-br from-white/12 via-[#1a2260] to-[#141a4a] p-10 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.35)] md:max-w-[560px] md:p-14">
-                                <ServiceIconVisual id={iconId} />
+                            <div className="relative aspect-[597/543] w-full max-w-[min(100%,520px)] overflow-hidden rounded-[20px] border border-onlan-lime/25 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.35)] md:max-w-[560px]">
+                                <Image
+                                    src={panelImageSrc}
+                                    alt={title}
+                                    fill
+                                    className="object-cover object-center"
+                                    sizes="(max-width: 768px) 100vw, 560px"
+                                />
+                                <div
+                                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#1a2058]/55 via-transparent to-transparent"
+                                    aria-hidden
+                                />
                             </div>
                         </div>
                     </div>

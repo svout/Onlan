@@ -128,7 +128,7 @@ function ServicesDropdown({ onNavigate }: { onNavigate?: () => void }) {
                 aria-expanded={isOpen}
                 onClick={() => setIsOpen((prev) => !prev)}
             >
-                Сервіси
+                Послуги
                 <svg
                     width="12"
                     height="12"
@@ -151,7 +151,7 @@ function ServicesDropdown({ onNavigate }: { onNavigate?: () => void }) {
             {isOpen && (
                 <div
                     role="menu"
-                    aria-label="Сервіси"
+                    aria-label="Послуги"
                     className="absolute left-1/2 top-full z-50 mt-2.5 w-[min(92vw,420px)] -translate-x-1/2 rounded-2xl border border-onlan-black/8 bg-onlan-white/96 p-1.5 shadow-[0_24px_48px_-16px_rgba(0,0,0,0.2)] backdrop-blur-md"
                 >
                     <ul className="flex flex-col gap-0.5">
@@ -211,7 +211,7 @@ function MobileServicesGroup({ onClose }: { onClose: () => void }) {
                 onClick={() => setIsOpen((prev) => !prev)}
                 className="flex items-center gap-2 px-3 py-2 rounded-lg uppercase transition-all hover:bg-onlan-white hover:text-onlan-blue"
             >
-                Сервіси
+                Послуги
                 <svg
                     width="12"
                     height="12"

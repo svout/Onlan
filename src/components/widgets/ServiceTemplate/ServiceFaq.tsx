@@ -101,7 +101,7 @@ export const ServiceFaq = ({ service }: ServiceFaqProps) => {
                                     onClick={() => setOpenIndex(isOpen ? null : index)}
                                     className="flex w-full items-center justify-between gap-4 py-5 text-left md:py-6"
                                 >
-                                    <span className="text-base font-semibold leading-snug text-onlan-black md:text-lg">
+                                    <span className="text-lg font-semibold leading-snug text-onlan-black md:text-xl">
                                         {index + 1}. {item.question}
                                     </span>
 
@@ -133,7 +133,7 @@ export const ServiceFaq = ({ service }: ServiceFaqProps) => {
                                     hidden={!isOpen}
                                     className="pb-5 pr-16 md:pb-6"
                                 >
-                                    <p className="text-sm leading-relaxed text-onlan-black/85 md:text-base">
+                                    <p className="text-base leading-relaxed text-onlan-black/85 md:text-lg">
                                         {item.answer}
                                     </p>
                                 </div>

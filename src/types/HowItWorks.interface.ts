@@ -22,4 +22,6 @@ export type HowItWorkProps = HowItWorksServiceItem & {
     total: number;
     /** Resolved asset URL from webpack (`asset/resource` import). */
     backgroundImageSrc: string;
+    /** Foreground photo shown in the right panel card. */
+    panelImageSrc: string;
 };

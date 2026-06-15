@@ -1,11 +1,8 @@
 import { HOW_IT_WORKS_SERVICES } from '@/components/widgets/HowItWork/howItWorksData';
 import { HowItWork } from '@/components/widgets/HowItWork/HowItWork';
 import { SERVICE_STEP_BACKGROUND_BY_SLUG } from '@/components/widgets/ServicesHowItWorksSection/serviceStepBackgrounds';
+import { SERVICE_STEP_PANEL_IMAGE_BY_SLUG } from '@/components/widgets/ServicesHowItWorksSection/serviceStepPanelImages';
 
-/**
- * Sticky stack: each service is `sticky top-0 min-h-dvh` with rising z-index so the next
- * panel slides over the previous while scrolling (same interaction as stacked “cards”).
- */
 export function ServicesHowItWorksSection() {
     const total = HOW_IT_WORKS_SERVICES.length;
 
@@ -18,6 +15,7 @@ export function ServicesHowItWorksSection() {
                     index={index}
                     total={total}
                     backgroundImageSrc={SERVICE_STEP_BACKGROUND_BY_SLUG[item.slug]}
+                    panelImageSrc={SERVICE_STEP_PANEL_IMAGE_BY_SLUG[item.slug]}
                 />
             ))}
         </div>

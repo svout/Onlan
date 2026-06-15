@@ -1,4 +1,5 @@
 import { HeroSection } from './HeroSection/HeroSection';
+import { HomeHeroSection } from './HomeHeroSection/HomeHeroSection';
 import { AntiPainSection } from './AntiPainSection';
 import { AboutCompanySection } from './AboutCompanySection/AboutCompanySection';
 import { AboutUsNew } from './AboutUsNew';
@@ -30,11 +31,14 @@ import {
     ServiceBenefits,
     ServiceProcess,
     ServiceCargoTypes,
+    ServiceCargoCards,
+    ServiceCases,
     ServiceFaq,
 } from './ServiceTemplate';
 
 export const Widgets = {
     HeroSection,
+    HomeHeroSection,
     RegionsMarqueeSection,
     AntiPainSection,
     AboutCompanySection,
@@ -63,5 +67,7 @@ export const Widgets = {
     ServiceBenefits,
     ServiceProcess,
     ServiceCargoTypes,
+    ServiceCargoCards,
+    ServiceCases,
     ServiceFaq,
 };
