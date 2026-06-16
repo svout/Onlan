@@ -180,9 +180,9 @@ export const HomeHeroSection = () => {
                                             <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-onlan-blue/8">
                                                 <Icon />
                                             </span>
-                                            <p className="m-0 text-[12px] font-medium leading-tight text-[#151936] min-[768px]:text-[13px]">
+                                            <p className="m-0 text-[12px] font-normal leading-tight text-[#151936] min-[768px]:text-[13px]">
                                                 {card.label}
-                                                <b className="block font-extrabold">{card.status}</b>
+                                                <span className="block font-normal">{card.status}</span>
                                             </p>
                                             <span
                                                 className={`ml-auto size-2 shrink-0 rounded-full ${

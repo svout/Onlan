@@ -9,12 +9,12 @@ export const HOME_HERO = {
         {
             key: 'manager',
             title: '1 менеджер',
-            description: 'веде весь маршрут',
+            description: 'на весь маршрут',
         },
         {
             key: 'support',
             title: '24/7',
-            description: 'на зв’язку з вами',
+            description: 'на зв’язку з Вами',
         },
         {
             key: 'predictable',

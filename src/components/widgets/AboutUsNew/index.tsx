@@ -1,26 +1,7 @@
 'use client';
 
 import { Link } from 'react-router';
-
-/** Picsum seeds → stable 300×200 images */
-const PHOTOS: {
-    seed: string;
-    top: string;
-    left: string;
-    rotate?: string;
-    /** z below marquee (5) or above (20) */
-    aboveText: boolean;
-    /** visual blur strength */
-    blur: '50' | '80' | '0';
-}[] = [
-        { seed: 'onlan-a', top: '5%', left: '10%', aboveText: false, blur: '80' },
-        { seed: 'onlan-b', top: '1%', left: '52%', aboveText: true, blur: '50' },
-        { seed: 'onlan-c', top: '15%', left: '78%', aboveText: false, blur: '50' },
-        { seed: 'onlan-d', top: '50%', left: '-4%', aboveText: true, blur: '50' },
-        { seed: 'onlan-e', top: '65%', left: '52%', aboveText: false, blur: '0' },
-        { seed: 'onlan-g', top: '70%', left: '26%', aboveText: false, blur: '50' },
-        { seed: 'onlan-h', top: '72%', left: '82%', aboveText: true, blur: '80' },
-    ];
+import { ABOUT_US_NEW_PHOTOS } from '@/content/aboutUsNewPhotos';
 
 const MARQUEE_REPEAT = 12;
 
@@ -72,8 +53,8 @@ export function AboutUsNew() {
 
                     {/* Photos — constrained layout */}
                     <div className="relative mx-auto min-h-[min(72vh,720px)] w-full max-w-[1400px] px-4 md:px-8">
-                        {PHOTOS.map((p) => {
-                            const id = `${p.seed}-${p.top}`;
+                        {ABOUT_US_NEW_PHOTOS.map((p) => {
+                            const id = p.id;
                             /* One `filter` value — Tailwind `blur-*` + `grayscale` both set `filter` and overwrite each other */
                             const filterClass =
                                 p.blur === '80'
@@ -99,7 +80,7 @@ export function AboutUsNew() {
                                         top: p.top,
                                         left: p.left,
                                     }}
-                                    aria-label="Фото ONLAN"
+                                    aria-label={p.alt}
                                 >
                                     <div
                                         className="relative h-full w-full origin-center transition-transform duration-300 ease-out will-change-transform group-hover:scale-[1.04]"
@@ -107,8 +88,8 @@ export function AboutUsNew() {
                                     >
                                         {/* eslint-disable-next-line @next/next/no-img-element */}
                                         <img
-                                            src={`https://picsum.photos/seed/${p.seed}/300/200`}
-                                            alt=""
+                                            src={p.src}
+                                            alt={p.alt}
                                             width={300}
                                             height={200}
                                             className={`h-full w-full object-cover transition-[filter] duration-300 ease-out ${filterClass} group-hover:[filter:grayscale(0)_blur(0)]`}
