@@ -28,7 +28,7 @@ type TitleProps = {
 
 const typeClasses: Record<'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6', string> = {
     h1: 'text-4xl md:text-5xl lg:text-[56px]',
-    h2: 'text-2xl md:text-5xl lg:text-5xl',
+    h2: 'text-2xl md:text-3xl lg:text-5xl',
     h3: 'text-[22px] md:text-[22px] lg:text-4xl',
     h4: 'text-2xl md:text-3xl lg:text-3xl',
     h5: 'text-xl md:text-2xl lg:text-2xl',

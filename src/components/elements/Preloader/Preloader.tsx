@@ -1,30 +1,17 @@
 /**
- * Premium fullscreen preloader.
+ * Fullscreen logistics preloader — dotted world map, dashed transport route
+ * with truck / ship / plane icons riding the arc, the OnLan wordmark, and a
+ * loading progress bar. Server-rendered for an instant first paint.
  *
- * Renders a fixed, top-most overlay that splits the viewport into the
- * Onlan brand colours along a 15° tilted diagonal divider. The brand
- * mark is centred in solid white, matching `PreloaderLogo.svg`.
- *
- * This is a server component — the markup is in the very first byte
- * of HTML the user receives, so the preloader paints on first frame
- * with zero FOUC and zero hydration wait.
- *
- * Drop into your root layout as the FIRST child of <body>:
- *
- *   <body>
- *       <Preloader />
- *       ...rest of the app...
- *   </body>
- *
- * The init script (inlined synchronously below the markup) handles
- * load timing and applies `is-hidden` after the exit transition. The
- * overlay node is never removed from the DOM so React reconciliation
- * stays valid (imperative `removeChild` caused insertBefore crashes).
+ * Init timing is handled by the inlined `PRELOADER_INIT_SCRIPT` (see
+ * preloader-init.ts). The overlay uses `#site-preloader` + `.is-hidden`.
  */
 
 import './preloader.css';
 
-import { PreloaderLogo } from './PreloaderLogo';
+import onlanLogo from '@icons/Onlan.svg';
+import { PreloaderRoute } from './PreloaderRoute';
+import { PreloaderWorldMap } from './PreloaderWorldMap';
 import { PRELOADER_INIT_SCRIPT } from './preloader-init';
 
 export function Preloader() {
@@ -35,23 +22,32 @@ export function Preloader() {
                 className="preloader"
                 role="status"
                 aria-live="polite"
-                aria-label="Loading"
+                aria-label="Завантаження"
             >
-                <div
-                    className="preloader__bg preloader__bg--lime"
-                    aria-hidden="true"
-                />
-                <div className="preloader__inner">
-                    <div className="preloader__logo">
-                        <PreloaderLogo className="preloader__logo-svg" />
+                <div className="preloader__stage">
+                    <PreloaderWorldMap />
+                    <PreloaderRoute />
+
+                    <div className="preloader__center">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                            src={onlanLogo}
+                            alt="OnLan Logistic"
+                            className="preloader__logo-img"
+                            width={278}
+                            height={126}
+                        />
+
+                        <p className="preloader__loading-text">Завантаження...</p>
+
+                        <div className="preloader__progress" aria-hidden>
+                            <div className="preloader__progress-fill" />
+                            <div className="preloader__progress-dot" />
+                        </div>
                     </div>
                 </div>
             </div>
-            {/*
-                Inline, synchronous init script. Runs immediately when the
-                browser parses this point in the document — no `defer`, no
-                `async`, no React hydration required.
-            */}
+
             <script
                 dangerouslySetInnerHTML={{ __html: PRELOADER_INIT_SCRIPT }}
             />

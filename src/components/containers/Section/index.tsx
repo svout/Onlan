@@ -18,7 +18,7 @@ export default function Section({ el, bg, bt, s, ah, usePaddings }: SectionInter
     return (
         <section
             className={clsx(
-                'relative w-full overflow-visible',
+                'relative w-full overflow-x-clip',
                 ah === false ? 'h-screen' : 'h-auto', // По умолчанию h-auto вместо h-screen
                 usePaddings && 'py-10'
             )}

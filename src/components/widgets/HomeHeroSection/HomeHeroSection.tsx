@@ -128,7 +128,7 @@ export const HomeHeroSection = () => {
                             <span aria-hidden>→</span>
                         </Link>
 
-                        <ul className="mt-6 grid max-w-[560px] list-none gap-5 min-[1200px]:mt-8 min-[1200px]:grid-cols-3 min-[1200px]:gap-4">
+                        <ul className="mt-6 grid max-w-[560px] list-none gap-5 sm:grid-cols-2 min-[1200px]:mt-8 min-[1200px]:grid-cols-3 min-[1200px]:gap-4">
                             {HOME_HERO.advantages.map((advantage) => {
                                 const Icon = ADVANTAGE_ICONS[advantage.key];
 
@@ -163,7 +163,7 @@ export const HomeHeroSection = () => {
                                 sizes="(max-width: 1200px) 100vw, 58vw"
                             />
 
-                            <div className="absolute inset-x-3 bottom-3 grid grid-cols-1 gap-2 rounded-xl bg-white/90 px-3 py-3 shadow-[0_12px_32px_rgba(31,38,96,0.16)] backdrop-blur-xl min-[768px]:inset-x-[6%] min-[768px]:bottom-4 min-[768px]:grid-cols-4 min-[768px]:gap-0 min-[768px]:px-3 min-[768px]:py-3">
+                            <div className="absolute inset-x-3 bottom-3 grid grid-cols-1 gap-2 rounded-xl bg-white/90 px-3 py-3 shadow-[0_12px_32px_rgba(31,38,96,0.16)] backdrop-blur-xl sm:grid-cols-2 sm:gap-3 md:inset-x-[4%] md:bottom-4 lg:grid-cols-4 lg:gap-0 lg:px-3 lg:py-3">
                                 {HOME_HERO.statusCards.map((card, index) => {
                                     const Icon = STATUS_ICONS[card.key];
                                     const isLast = index === HOME_HERO.statusCards.length - 1;
@@ -171,16 +171,16 @@ export const HomeHeroSection = () => {
                                     return (
                                         <div
                                             key={card.key}
-                                            className={`flex items-center gap-2 px-0 min-[768px]:px-2.5 ${
+                                            className={`flex items-center gap-2 px-0 lg:px-2.5 ${
                                                 !isLast
-                                                    ? 'min-[768px]:border-r min-[768px]:border-onlan-blue/14'
+                                                    ? 'lg:border-r lg:border-onlan-blue/14'
                                                     : ''
                                             }`}
                                         >
                                             <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-onlan-blue/8">
                                                 <Icon />
                                             </span>
-                                            <p className="m-0 text-[12px] font-normal leading-tight text-[#151936] min-[768px]:text-[13px]">
+                                            <p className="m-0 text-[12px] font-normal leading-tight text-[#151936] sm:text-[13px]">
                                                 {card.label}
                                                 <span className="block font-normal">{card.status}</span>
                                             </p>

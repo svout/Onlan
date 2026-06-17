@@ -18,7 +18,7 @@ export function ContactsHeroSection() {
         >
             <div className="container relative mx-auto flex min-h-[75vh] items-center px-4 py-8 md:min-h-[90vh] md:py-10 lg:py-12">
                 <div
-                    className="pointer-events-none absolute right-0 top-0 z-0 aspect-[830/890] h-[70vh] w-auto max-w-[min(70vw,calc(100%-1rem))] md:h-[90vh] md:max-w-[min(70vw,900px)]"
+                    className="pointer-events-none absolute right-0 top-0 z-0 aspect-[830/890] h-[45vh] w-auto max-w-[min(85vw,calc(100%-1rem))] sm:h-[55vh] md:h-[70vh] md:max-w-[min(70vw,900px)] lg:h-[90vh]"
                     aria-hidden
                 >
                     <ContactsHeroShape className="h-full w-full -rotate-6 md:-rotate-8 lg:-rotate-12" />
@@ -30,7 +30,7 @@ export function ContactsHeroSection() {
                             id={headingId}
                             title={CONTACTS_HERO.title}
                             type="h1"
-                            className="font-bold text-[60px] text-onlan-black"
+                            className="font-bold text-[clamp(1.75rem,7vw,3.75rem)] leading-[1.05] text-onlan-black"
                         />
 
                         <ul
@@ -61,7 +61,7 @@ export function ContactsHeroSection() {
                     <Elements.Title
                         title={CONTACTS_HERO.brandTitle}
                         type="h1"
-                        className="font-bold text-[60px] text-onlan-black"
+                        className="font-bold text-[clamp(1.75rem,7vw,3.75rem)] leading-[1.05] text-onlan-black"
                         highlights={[
                             { text: 'ONLAN', className: 'uppercase' },
                             { text: 'Logistic', className: 'normal-case' },

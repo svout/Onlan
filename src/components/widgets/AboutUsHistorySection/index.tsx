@@ -48,47 +48,48 @@ export const AboutUsHistorySection = () => {
                 />
 
                 <div className="mx-auto mt-10 w-full max-w-[1200px] lg:mt-14">
-                    <div className="-mx-1 overflow-x-auto px-1 pb-2 [scrollbar-gutter:stable] md:mx-0 md:overflow-visible md:px-0">
-                        <div className="mx-auto w-full min-w-[720px] max-w-[1200px] md:min-w-0">
-                            <div className="grid grid-cols-5 gap-0">
-                                {ABOUT_US_HISTORY_MILESTONES.map((m) => (
+                    <div className="mx-auto w-full max-w-[1200px]">
+                        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5 lg:gap-0">
+                            {ABOUT_US_HISTORY_MILESTONES.map((m) => (
+                                <div
+                                    key={m.year}
+                                    className="flex min-w-0 flex-col items-stretch"
+                                >
                                     <div
-                                        key={m.year}
-                                        className="flex min-w-0 flex-col items-stretch"
-                                    >
-                                        <div
-                                            className={clsx(
-                                                'flex aspect-square w-full items-center justify-center rounded-full p-2 text-center shadow-sm sm:p-3 md:p-4',
-                                                BG_OPACITY_CLASS[m.bgOpacityPercent],
-                                                milestoneTextClass(m.bgOpacityPercent),
-                                            )}
-                                        >
-                                            <p className="text-balance text-[0.65rem] font-medium leading-snug sm:text-xs md:text-sm lg:text-[0.95rem]">
-                                                {m.text}
-                                            </p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div
-                                className="mt-6 flex w-full max-w-[1000px] justify-center mx-auto items-center md:mt-8"
-                                role="presentation"
-                            >
-                                {ABOUT_US_HISTORY_MILESTONES.map((m, i) => (
-                                    <Fragment key={`yr-${m.year}`}>
-                                        {i > 0 && (
-                                            <div
-                                                className="h-px min-h-px min-w-[8px] flex-1 bg-onlan-blue/35"
-                                                aria-hidden
-                                            />
+                                        className={clsx(
+                                            'flex aspect-square w-full items-center justify-center rounded-full p-2 text-center shadow-sm sm:p-3 md:p-4',
+                                            BG_OPACITY_CLASS[m.bgOpacityPercent],
+                                            milestoneTextClass(m.bgOpacityPercent),
                                         )}
-                                        <span className="shrink-0 px-1 text-center text-sm font-semibold tabular-nums text-onlan-blue first:pl-0 last:pr-0 md:px-1.5 md:text-base">
-                                            {m.year}
-                                        </span>
-                                    </Fragment>
-                                ))}
-                            </div>
+                                    >
+                                        <p className="text-balance text-[0.7rem] font-medium leading-snug sm:text-xs md:text-sm lg:text-[0.95rem]">
+                                            {m.text}
+                                        </p>
+                                    </div>
+                                    <span className="mt-3 block text-center text-sm font-semibold tabular-nums text-onlan-blue md:mt-4 md:text-base lg:hidden">
+                                        {m.year}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div
+                            className="mt-6 hidden w-full max-w-[1000px] items-center justify-center mx-auto md:mt-8 lg:flex"
+                            role="presentation"
+                        >
+                            {ABOUT_US_HISTORY_MILESTONES.map((m, i) => (
+                                <Fragment key={`yr-${m.year}`}>
+                                    {i > 0 && (
+                                        <div
+                                            className="h-px min-h-px min-w-[8px] flex-1 bg-onlan-blue/35"
+                                            aria-hidden
+                                        />
+                                    )}
+                                    <span className="shrink-0 px-1.5 text-center text-base font-semibold tabular-nums text-onlan-blue">
+                                        {m.year}
+                                    </span>
+                                </Fragment>
+                            ))}
                         </div>
                     </div>
                 </div>

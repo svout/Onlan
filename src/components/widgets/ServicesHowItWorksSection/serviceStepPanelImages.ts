@@ -10,7 +10,6 @@ import imgRoad from '@images/MultiModals.jpg';
 import imgCustoms from '@images/Mytne.jpg';
 import imgOversized from '@images/Negabarutni.jpg';
 import imgRail from '@images/Zaliznuchni.jpg';
-import imgContainer from '@images/cargo/container.jpg';
 
 export const SERVICE_STEP_PANEL_IMAGE_BY_SLUG: Record<
     HowItWorksServiceItem['slug'],
@@ -22,5 +21,5 @@ export const SERVICE_STEP_PANEL_IMAGE_BY_SLUG: Record<
     rail: imgRail,
     oversized: imgOversized,
     customs: imgCustoms,
-    multimodal: imgContainer,
+    multimodal: imgRoad,
 };

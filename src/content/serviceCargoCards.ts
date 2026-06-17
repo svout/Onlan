@@ -31,6 +31,7 @@ export type ServiceCargoCard = {
 };
 
 export type ServiceCargoSection = {
+    eyebrow: string;
     heading: string;
     headingHighlight: string;
     cards: ServiceCargoCard[];
@@ -38,6 +39,7 @@ export type ServiceCargoSection = {
 
 export const SERVICE_CARGO_SECTIONS: Record<string, ServiceCargoSection> = {
     automotive: {
+        eyebrow: 'Що возимо',
         heading: 'Що ми перевозимо автомобільним транспортом',
         headingHighlight: 'перевозимо',
         cards: [
@@ -86,6 +88,7 @@ export const SERVICE_CARGO_SECTIONS: Record<string, ServiceCargoSection> = {
         ],
     },
     'sea-container': {
+        eyebrow: 'Морські лінії',
         heading: 'Які вантажі доставляємо морем',
         headingHighlight: 'доставляємо морем',
         cards: [
@@ -134,6 +137,7 @@ export const SERVICE_CARGO_SECTIONS: Record<string, ServiceCargoSection> = {
         ],
     },
     air: {
+        eyebrow: 'Авіа',
         heading: 'Для яких вантажів підходить авіадоставка',
         headingHighlight: 'підходить авіадоставка',
         cards: [
@@ -176,6 +180,7 @@ export const SERVICE_CARGO_SECTIONS: Record<string, ServiceCargoSection> = {
         ],
     },
     rail: {
+        eyebrow: 'Залізниця',
         heading: 'Що перевозимо залізницею',
         headingHighlight: 'перевозимо залізницею',
         cards: [
@@ -218,6 +223,7 @@ export const SERVICE_CARGO_SECTIONS: Record<string, ServiceCargoSection> = {
         ],
     },
     oversized: {
+        eyebrow: 'Проєктна логістика',
         heading: 'Які проєкти супроводжуємо',
         headingHighlight: 'супроводжуємо',
         cards: [
@@ -260,6 +266,7 @@ export const SERVICE_CARGO_SECTIONS: Record<string, ServiceCargoSection> = {
         ],
     },
     customs: {
+        eyebrow: 'Митниця',
         heading: 'Для яких вантажів надаємо митний супровід',
         headingHighlight: 'надаємо митний супровід',
         cards: [
@@ -302,6 +309,7 @@ export const SERVICE_CARGO_SECTIONS: Record<string, ServiceCargoSection> = {
         ],
     },
     multimodal: {
+        eyebrow: 'Мультимодальні перевезення',
         heading: 'Які вантажі перевозимо мультимодально',
         headingHighlight: 'перевозимо мультимодально',
         cards: [

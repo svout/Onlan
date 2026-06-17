@@ -21,7 +21,7 @@ export default function Layout({ children }: LayoutProps = {}) {
     }, [location.pathname]);
 
     return (
-        <div className={'layout flex flex-col min-h-screen'} id="layout">
+        <div className={'layout flex min-h-screen flex-col overflow-x-clip'} id="layout">
             <Header />
             <main className="flex-1">
                 <Outlet />

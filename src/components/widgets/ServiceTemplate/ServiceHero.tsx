@@ -18,7 +18,7 @@ export const ServiceHero = ({ service }: ServiceHeroProps) => {
 
     return (
         <section
-            className="relative w-full h-[calc(100vh-80px)] overflow-hidden border-t border-onlan-lime/25"
+            className="relative w-full min-h-[calc(100dvh-5rem)] overflow-x-hidden border-t border-onlan-lime/25 lg:min-h-[calc(100dvh-5rem)]"
             style={{ backgroundColor: '#2D368B' }}
             aria-labelledby={`service-hero-${service.slug}`}
         >
@@ -32,9 +32,9 @@ export const ServiceHero = ({ service }: ServiceHeroProps) => {
                 </div>
             )}
 
-            <div className="relative z-1 container max-w-7xl mx-auto px-4 py-16 md:py-20 lg:py-24">
-                <div className="flex flex-col items-start gap-10 md:flex-row md:items-start md:justify-between md:gap-10 lg:gap-16">
-                    <div className="flex w-full flex-col md:max-w-[calc(100%-496px)]">
+            <div className="relative z-1 container mx-auto max-w-7xl px-4 py-12 md:py-16 lg:py-24">
+                <div className="flex flex-col items-start gap-8 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
+                    <div className="flex w-full flex-col lg:max-w-[calc(100%-29rem)]">
                         <h1
                             id={`service-hero-${service.slug}`}
                             className="mt-6 text-balance text-3xl font-bold leading-tight text-white md:mt-8 md:text-4xl lg:text-[52px] lg:leading-[1.05]"
@@ -60,7 +60,7 @@ export const ServiceHero = ({ service }: ServiceHeroProps) => {
                         )}
                     </div>
 
-                    <div className="w-full max-w-[464px] shrink-0">
+                    <div className="w-full max-w-full shrink-0 lg:max-w-[464px]">
                         <form
                             className="w-full rounded-[20px] border border-[#D5E82D] bg-white/10 p-5 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.35)] backdrop-blur-[17px] md:p-6"
                             onSubmit={onSubmit}

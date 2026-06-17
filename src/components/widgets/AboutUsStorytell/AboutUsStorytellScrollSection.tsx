@@ -112,8 +112,8 @@ export function AboutUsStorytellScrollSection() {
                 className="relative"
                 style={{ height: `${STORY_STEPS.length * 100}vh` }}
             >
-                <div className="sticky top-0 flex h-screen flex-col">
-                    <div className="container mx-auto shrink-0 px-4 pt-12 md:pt-16">
+                <div className="sticky top-0 flex h-[100dvh] min-h-[520px] flex-col">
+                    <div className="container mx-auto shrink-0 px-4 pt-8 md:pt-12 lg:pt-16">
                         <div className="flex w-full items-center justify-start gap-2">
                             <div className="size-2 shrink-0 rounded-full bg-onlan-lime" />
                             <div className="rounded-full border border-onlan-black px-3 py-1.5 md:px-4 md:py-2">

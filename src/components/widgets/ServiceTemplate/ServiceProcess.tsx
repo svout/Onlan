@@ -51,7 +51,7 @@ function ProcessStepItem({ number, title, description, index }: ProcessStepItemP
             }}
         >
             <span
-                className="select-none font-bold tabular-nums leading-none text-onlan-blue text-[64px] md:text-[80px]"
+                className="select-none font-bold tabular-nums leading-none text-onlan-blue [font-size:clamp(2.5rem,10vw,5rem)]"
                 aria-hidden
             >
                 {number}

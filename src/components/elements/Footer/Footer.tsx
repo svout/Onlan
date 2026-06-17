@@ -140,7 +140,7 @@ export const Footer = () => {
                                         className="size-4 shrink-0 text-onlan-lime"
                                         aria-hidden
                                     />
-                                    <span className="whitespace-nowrap">{CONTACT.email}</span>
+                                    <span className="min-w-0 break-all sm:break-normal">{CONTACT.email}</span>
                                 </a>
                                 <a
                                     href={`tel:${CONTACT.phoneTel}`}

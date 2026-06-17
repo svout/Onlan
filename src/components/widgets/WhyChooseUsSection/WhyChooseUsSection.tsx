@@ -80,31 +80,31 @@ function WhyChooseUsStats() {
         >
             {/* Верхня смуга довша; обидві прижаті до правого краю екрана, без container */}
             <div
-                className="ml-auto flex w-[90%] flex-col gap-3 rounded-l-2xl py-4 pl-5 pr-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:pl-8 sm:pr-8 md:py-5 lg:pl-10 lg:pr-12"
+                className="ml-auto flex w-[92%] flex-col gap-3 rounded-l-2xl py-4 pl-5 pr-5 sm:w-[90%] lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:pl-10 lg:pr-12"
                 style={{ backgroundColor: '#D5E82D' }}
             >
                 <span
-                    className="text-[122px] font-bold tabular-nums leading-none text-onlan-blue"
+                    className="text-[clamp(3rem,18vw,7.5rem)] font-bold tabular-nums leading-none text-onlan-blue"
                     aria-live="polite"
                 >
                     {clientsPct}%
                 </span>
-                <p className="max-w-3xl min-w-0 flex-1 text-left text-base font-semibold text-onlan-blue sm:text-lg md:text-[60px]">
+                <p className="max-w-3xl min-w-0 flex-1 text-left text-base font-semibold text-onlan-blue sm:text-lg md:text-xl lg:text-3xl xl:text-[60px]">
                     Задоволених клієнтів
                 </p>
             </div>
 
             <div
-                className="ml-auto flex w-[85%] flex-col gap-4 rounded-l-2xl py-4 pl-5 pr-5 sm:flex-row sm:items-center sm:justify-between sm:gap-12 sm:pl-8 sm:pr-8 md:gap-16 md:py-5 lg:gap-20 lg:pl-10 lg:pr-12"
+                className="ml-auto flex w-[88%] flex-col gap-4 rounded-l-2xl py-4 pl-5 pr-5 sm:w-[85%] lg:flex-row lg:items-center lg:justify-between lg:gap-20 lg:pl-10 lg:pr-12"
                 style={{ backgroundColor: '#2D368B' }}
             >
                 <span
-                    className="shrink-0 text-[122px] font-bold tabular-nums leading-none text-onlan-lime"
+                    className="shrink-0 text-[clamp(3rem,18vw,7.5rem)] font-bold tabular-nums leading-none text-onlan-lime"
                     aria-live="polite"
                 >
                     {cargoPct}%
                 </span>
-                <p className="max-w-3xl min-w-0 flex-1 text-left text-base font-semibold text-onlan-lime sm:text-lg md:text-[60px]">
+                <p className="max-w-3xl min-w-0 flex-1 text-left text-base font-semibold text-onlan-lime sm:text-lg md:text-xl lg:text-3xl xl:text-[60px]">
                     Вантажів проходить без затримок
                 </p>
             </div>
@@ -146,7 +146,7 @@ export const WhyChooseUsSection = () => {
                 </div>
 
                 <div className="mt-6 flex w-full flex-col gap-10 md:mt-8 md:flex-row md:items-stretch md:gap-10 lg:gap-14">
-                    <div className='rounded-2xl w-full max-w-[400px]'>
+                    <div className="mx-auto w-full max-w-[400px] rounded-2xl md:mx-0">
                         <Image src={WhyChooseUsImage} alt="Автотранспорт для доставки вантажів ONLAN" width={400} height={800} className='w-full h-full object-cover object-center rounded-2xl' />
                     </div>
                     <div className="min-w-0 flex-1">
@@ -154,7 +154,7 @@ export const WhyChooseUsSection = () => {
                             id="why-choose-heading"
                             title="Як ми вирішуємо ці проблеми"
                             type="h1"
-                            className="mt-2 w-full min-w-0 max-w-none text-left text-xl! font-bold! leading-snug! text-onlan-black md:mt-3 md:text-2xl! lg:text-[60px]!"
+                            className="mt-2 w-full min-w-0 max-w-none text-left text-xl! font-bold! leading-snug! text-onlan-black md:mt-3 md:text-2xl! lg:text-4xl! xl:text-[60px]!"
                         />
                         <div className="mt-8 grid grid-cols-1 gap-10 md:mt-10 md:grid-cols-2 md:gap-x-8 md:gap-y-12 lg:gap-x-12">
                             <ul className="flex flex-col gap-10 md:gap-12" role="list">

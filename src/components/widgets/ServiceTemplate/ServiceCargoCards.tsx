@@ -159,13 +159,24 @@ export const ServiceCargoCards = ({ service }: ServiceCargoCardsProps) => {
             className="relative w-full bg-onlan-white py-12 md:py-16 lg:py-20"
             aria-labelledby={headingId}
         >
-            <div className="container mx-auto px-4 text-center">
-                <h2
-                    id={headingId}
-                    className="mx-auto mb-10 max-w-4xl text-balance text-2xl font-extrabold uppercase leading-tight tracking-wide text-onlan-black md:mb-12 md:text-[34px]"
-                >
-                    {renderCargoHeading(section.heading, section.headingHighlight)}
-                </h2>
+            <div className="container mx-auto px-4">
+                <div className="mb-10 text-left md:mb-12">
+                    <div className="flex items-center justify-start gap-2">
+                        <div className="size-2 shrink-0 rounded-full bg-onlan-lime" />
+                        <div className="rounded-full border border-onlan-black px-3 py-1.5 md:px-4 md:py-2">
+                            <p className="text-left text-xs font-semibold uppercase tracking-[0.14em] text-onlan-black md:text-sm">
+                                {section.eyebrow}
+                            </p>
+                        </div>
+                    </div>
+
+                    <h2
+                        id={headingId}
+                        className="mt-6 max-w-4xl text-balance text-2xl font-extrabold uppercase leading-tight tracking-wide text-onlan-black md:text-[34px]"
+                    >
+                        {renderCargoHeading(section.heading, section.headingHighlight)}
+                    </h2>
+                </div>
 
                 <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-[26px]">
                     {section.cards.map((card, index) => (
@@ -175,7 +186,7 @@ export const ServiceCargoCards = ({ service }: ServiceCargoCardsProps) => {
 
                 <Link
                     to="/#contact"
-                    className="mt-10 inline-flex items-center justify-center rounded-[10px] bg-onlan-lime px-10 py-4 text-base font-extrabold text-onlan-black transition-all hover:-translate-y-0.5 hover:opacity-90 md:mt-11"
+                    className="mt-10 inline-flex w-full items-center justify-center rounded-[10px] bg-onlan-lime px-10 py-4 text-base font-extrabold text-onlan-black transition-all hover:-translate-y-0.5 hover:opacity-90 sm:w-auto md:mt-11"
                 >
                     Розрахувати вартість
                 </Link>

@@ -34,7 +34,7 @@ export function ContactsQuoteFormSection() {
     return (
         <section className="w-full pb-10 md:pb-14" aria-labelledby={headingId}>
             <div className="container mx-auto flex flex-col items-start px-4">
-                <div className="relative isolate flex min-h-[440px] w-full flex-col items-start justify-center overflow-hidden rounded-2xl bg-onlan-blue md:min-h-[480px] lg:min-h-[720px]">
+                <div className="relative isolate flex min-h-0 w-full flex-col items-start justify-center overflow-hidden rounded-2xl bg-onlan-blue py-8 md:min-h-[480px] lg:min-h-[720px]">
                     <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
                         <div className="absolute top-1/2 right-[-20%] -translate-y-1/2 sm:right-[-8%] md:right-[-6%] lg:right-[-15%]">
                             <Image
@@ -53,7 +53,7 @@ export function ContactsQuoteFormSection() {
                             id={headingId}
                             title={CONTACTS_QUOTE_FORM.title}
                             type="h2"
-                            className="text-onlan-white w-full !text-[60px]"
+                            className="w-full text-onlan-white text-[clamp(1.75rem,6vw,3.75rem)] leading-tight"
                         />
 
                         <form className="mt-7 flex w-full max-w-[624px] flex-col gap-4" onSubmit={onSubmit} noValidate>

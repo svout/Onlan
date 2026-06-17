@@ -28,7 +28,7 @@ export const PRELOADER_INIT_SCRIPT = `(function () {
 
     var PRELOADER_ID = 'site-preloader';
     var MIN_DURATION = 2000;
-    var EXIT_DURATION = 900;
+    var EXIT_DURATION = 700;
     var HIDDEN_CLASS = 'is-hidden';
 
     var startedAt = Date.now();

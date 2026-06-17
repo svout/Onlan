@@ -1,50 +1,21 @@
 /* =========================================================================
-   PREMIUM PRELOADER — STYLES
-   -------------------------------------------------------------------------
-   Onlan brand split (deep blue + lime) with a 15° tilted diagonal through
-   the viewport centre. Two flat colours meet along one straight edge: the
-   base is solid blue; a solid lime layer is clipped with `clip-path` so
-   there is no gradient band — only a geometric join (no third “border”
-   colour between them).
-
-   The logo is the original solid white mark (same as PreloaderLogo.svg).
-
-   CUSTOMIZE
-   ---------
-   • Colors and timings live as CSS custom properties at the top.
-   • Replace the SVG inside <PreloaderLogo /> to swap the brand mark.
-   • Sizes are responsive via clamp().
-
-   PERFORMANCE
-   -----------
-   • Animations use only `transform` and `opacity` so they run on the GPU.
-   • `will-change` is declared only on actively animated nodes.
+   ONLAN LOGISTICS PRELOADER
+   White canvas, dotted world map, dashed transport route with truck / ship /
+   plane riding the arc, OnLan wordmark + loading progress.
+   Keeps the `#site-preloader` + `.is-hidden` contract for preloader-init.ts.
    ========================================================================= */
 
 :root {
     --preloader-blue: #2c358c;
-    --preloader-lime: #d5e82d;
+    --preloader-blue-soft: #5962d6;
+    --preloader-white: #ffffff;
     --preloader-min-duration: 2000ms;
-    --preloader-exit-duration: 900ms;
-    --preloader-ease: cubic-bezier(0.65, 0, 0.35, 1);
+    --preloader-exit-duration: 700ms;
     --preloader-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* -------------------------------------------------------------------------
-   Scroll lock — CSS-only via :has(), so we never mutate <html>/<body>
-   before React hydrates (avoids hydration mismatch). When the preloader
-   gains `.is-hidden`, these rules no longer apply and scrolling returns.
-
-   Browsers without :has() (< Safari 15.4) may allow brief scroll until the
-   overlay is dismissed; impact is minimal on current evergreen targets.
-   ------------------------------------------------------------------------- */
 @supports selector(:has(*)) {
-    html:has(#site-preloader:not(.is-hidden)) {
-        overflow: hidden !important;
-        height: 100% !important;
-        touch-action: none;
-        overscroll-behavior: none;
-    }
+    html:has(#site-preloader:not(.is-hidden)),
     html:has(#site-preloader:not(.is-hidden)) body {
         overflow: hidden !important;
         height: 100% !important;
@@ -53,137 +24,276 @@
     }
 }
 
-/* -------------------------------------------------------------------------
-   Overlay — full-viewport, top-most, instant first paint.
-   The base color is the brand blue so the left half is correct even
-   before the lime layer paints.
-   ------------------------------------------------------------------------- */
 .preloader {
     position: fixed;
     inset: 0;
     z-index: 2147483647;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
+    background-color: var(--preloader-white);
     pointer-events: auto;
-    background-color: var(--preloader-blue);
     contain: layout paint style;
     transition:
-        opacity var(--preloader-exit-duration) var(--preloader-ease-out),
-        transform var(--preloader-exit-duration) var(--preloader-ease-out),
+        opacity var(--preloader-exit-duration) ease,
         visibility 0s linear var(--preloader-exit-duration);
-    will-change: opacity, transform;
+    will-change: opacity;
 }
 
 .preloader.is-hidden {
     opacity: 0;
-    transform: translate3d(0, -2vh, 0);
     visibility: hidden;
     pointer-events: none;
 }
 
-/* -------------------------------------------------------------------------
-   Background split — geometric join (no gradient)
-   Solid blue is the `.preloader` base. A full-size solid lime layer sits
-   on top and is clipped to the region *to the right* of a straight line
-   through the viewport centre tilted 15° from vertical.
-
-   Geometry: tan(15°) ≈ 0.2679. Half the viewport height = 50vh, so the
-   horizontal run from centre to top/bottom edge of the line ≈ 13.4vh.
-   Result: two opaque colours sharing one edge — no blend band.
-   ------------------------------------------------------------------------- */
-.preloader__bg {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    will-change: transform, opacity;
+/* ---- Stage: holds map (behind), route, and centre column ---------------- */
+.preloader__stage {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(1080px, 92vw);
+    animation: preloader-rise 0.8s var(--preloader-ease-out) both;
 }
 
-.preloader__bg--lime {
-    background-color: var(--preloader-lime);
-    clip-path: polygon(
-        calc(50% + 13.4vh) 0%,
-        100% 0%,
-        100% 100%,
-        calc(50% - 13.4vh) 100%
-    );
-    transform: translate3d(0, 0, 0);
-    opacity: 0;
-    animation: preloader-lime-in 900ms var(--preloader-ease-out) 80ms forwards;
-}
-
-@keyframes preloader-lime-in {
+@keyframes preloader-rise {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
     to {
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
-/* -------------------------------------------------------------------------
-   Centred logo column
-   ------------------------------------------------------------------------- */
-.preloader__inner {
+/* ---- Dotted world map -------------------------------------------------- */
+.preloader__map-svg {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    width: 132%;
+    height: auto;
+    transform: translate(-50%, -50%);
+    opacity: 0.16;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ---- Route arc + icons ------------------------------------------------- */
+.preloader__route-svg {
     position: relative;
     z-index: 1;
-    width: 100%;
-    height: 100%;
-    display: grid;
-    place-items: center;
-    padding: clamp(24px, 5vw, 48px);
-}
-
-/* -------------------------------------------------------------------------
-   Logo block — single SVG, solid white fills (original asset colours).
-   ------------------------------------------------------------------------- */
-.preloader__logo {
-    position: relative;
-    display: block;
-    width: clamp(200px, 30vw, 360px);
-    aspect-ratio: 595 / 272;
-    opacity: 0;
-    transform: translate3d(0, 16px, 0) scale(0.86);
-    transform-origin: center;
-    animation:
-        preloader-logo-in 1200ms var(--preloader-ease-out) 220ms forwards,
-        preloader-logo-pulse 5s ease-in-out 1500ms infinite;
-    filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.18));
-    will-change: transform, opacity;
-}
-
-.preloader__logo-svg {
     display: block;
     width: 100%;
-    height: 100%;
-    shape-rendering: geometricPrecision;
+    height: auto;
+    overflow: visible;
 }
 
-@keyframes preloader-logo-in {
+/* Faint, evenly dotted baseline arc */
+.preloader__arc--base {
+    stroke-opacity: 0.4;
+}
+
+/* Bright dash that travels along the whole route (pathLength normalised to 100) */
+.preloader__arc--flow {
+    stroke-opacity: 0.95;
+    animation: preloader-comet 2.6s linear infinite;
+}
+
+@keyframes preloader-comet {
+    from {
+        stroke-dashoffset: 100;
+    }
     to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0) scale(1);
+        stroke-dashoffset: 0;
     }
 }
 
-@keyframes preloader-logo-pulse {
+/* Endpoint halos */
+.preloader__halo {
+    fill-opacity: 0.06;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: preloader-halo 2.4s ease-in-out infinite;
+}
+
+.preloader__halo--right {
+    animation-delay: 1.2s;
+}
+
+@keyframes preloader-halo {
     0%,
     100% {
-        transform: scale(1);
+        transform: scale(0.82);
+        fill-opacity: 0.05;
     }
     50% {
-        transform: scale(1.012);
+        transform: scale(1.12);
+        fill-opacity: 0.09;
     }
 }
 
-/* -------------------------------------------------------------------------
-   Reduced motion — collapse everything to a calm fade.
-   ------------------------------------------------------------------------- */
-@media (prefers-reduced-motion: reduce) {
-    .preloader__bg--lime,
-    .preloader__logo {
-        animation-duration: 1ms !important;
-        animation-iteration-count: 1 !important;
-        animation-delay: 0ms !important;
-        opacity: 1;
-        transform: none;
+/* Floating transport icons (placement lives on the parent <g>, so the float
+   transform here is purely a vertical bob that composes with it). */
+.preloader__veh {
+    animation: preloader-float 2.9s ease-in-out infinite;
+    will-change: transform;
+}
+
+.preloader__veh--truck {
+    animation-duration: 2.8s;
+}
+
+.preloader__veh--ship {
+    animation-duration: 3.2s;
+}
+
+.preloader__veh--plane {
+    animation-duration: 2.5s;
+    animation-delay: 0.25s;
+}
+
+@keyframes preloader-float {
+    0%,
+    100% {
+        transform: translateY(0);
     }
-    .preloader.is-hidden {
-        transform: none;
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* ---- Centre column: logo, text, progress ------------------------------ */
+.preloader__center {
+    position: relative;
+    z-index: 2;
+    /* Lift up into the arc opening (percentage is relative to stage width). */
+    margin-top: -12%;
+    width: min(320px, 78%);
+    text-align: center;
+}
+
+.preloader__logo-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 auto clamp(28px, 5vh, 48px);
+    filter: drop-shadow(0 14px 26px rgba(44, 53, 140, 0.14));
+}
+
+.preloader__loading-text {
+    margin: 0 0 22px;
+    color: var(--preloader-blue);
+    font-size: clamp(1.05rem, 2.4vw, 1.4rem);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    animation: preloader-text-breathe 1.8s ease-in-out infinite;
+}
+
+@keyframes preloader-text-breathe {
+    0%,
+    100% {
+        opacity: 0.55;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.preloader__progress {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    height: 5px;
+    margin: 0 auto;
+    border-radius: 999px;
+    background: rgba(44, 53, 140, 0.12);
+}
+
+.preloader__progress-fill {
+    width: 62%;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--preloader-blue), var(--preloader-blue-soft));
+    animation: preloader-progress-move 1.8s ease-in-out infinite;
+}
+
+.preloader__progress-dot {
+    position: absolute;
+    top: 50%;
+    left: 62%;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--preloader-blue-soft);
+    box-shadow: 0 0 16px rgba(89, 98, 214, 0.5);
+    transform: translate(-50%, -50%);
+    animation: preloader-progress-dot 1.8s ease-in-out infinite;
+}
+
+@keyframes preloader-progress-move {
+    0%,
+    100% {
+        width: 25%;
+    }
+    50% {
+        width: 68%;
+    }
+}
+
+@keyframes preloader-progress-dot {
+    0%,
+    100% {
+        left: 25%;
+    }
+    50% {
+        left: 68%;
+    }
+}
+
+/* ---- Responsive ------------------------------------------------------- */
+@media (max-width: 640px) {
+    .preloader__stage {
+        width: 94vw;
+    }
+
+    .preloader__map-svg {
+        width: 150%;
+    }
+
+    .preloader__center {
+        margin-top: -10%;
+        width: min(240px, 70%);
+    }
+}
+
+/* ---- Reduced motion --------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    .preloader__stage,
+    .preloader__arc--flow,
+    .preloader__halo,
+    .preloader__veh,
+    .preloader__loading-text,
+    .preloader__progress-fill,
+    .preloader__progress-dot {
+        animation: none !important;
+    }
+
+    .preloader__arc--flow {
+        display: none;
+    }
+
+    .preloader__loading-text {
+        opacity: 1;
+    }
+
+    .preloader__progress-fill {
+        width: 62%;
+    }
+
+    .preloader__progress-dot {
+        left: 62%;
     }
 }

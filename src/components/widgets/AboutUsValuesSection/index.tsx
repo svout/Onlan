@@ -56,7 +56,7 @@ export const AboutUsValuesSection = () => {
                         const Icon = VALUE_ICONS[item.icon];
                         return (
                             <li key={item.title} className="flex">
-                                <article className="relative flex min-h-[260px] w-full flex-1 flex-col overflow-hidden rounded-2xl border border-onlan-black/10 bg-onlan-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.06)] md:min-h-[280px] md:p-8">
+                                <article className="relative flex min-h-[240px] w-full flex-1 flex-col overflow-hidden rounded-2xl border border-onlan-black/10 bg-onlan-white p-5 shadow-[0_8px_30px_rgba(0,0,0,0.06)] sm:p-6 md:min-h-[280px] md:p-8">
                                     <div className="absolute left-6 top-6 z-10 md:left-8 md:top-8">
                                         <span className="inline-flex size-12 shrink-0 items-center justify-center rounded-full bg-onlan-lime text-onlan-blue md:size-14">
                                             <Icon className="size-6 md:size-7" aria-hidden />
@@ -76,7 +76,7 @@ export const AboutUsValuesSection = () => {
                                         />
                                     </div>
 
-                                    <div className="relative z-10 flex max-w-[75%] flex-col pt-25 md:pt-25">
+                                    <div className="relative z-10 flex max-w-[75%] flex-col pt-20 md:pt-25">
                                         <h3 className="text-lg font-semibold leading-snug text-onlan-black md:text-xl">
                                             {item.title}
                                         </h3>

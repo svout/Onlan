@@ -57,7 +57,7 @@ export function HowItWork(props: HowItWorkProps) {
     return (
         <section
             ref={containerRef}
-            className="sticky top-0 min-h-dvh w-full border-t border-onlan-lime/25 overflow-hidden"
+            className="sticky top-0 min-h-[85dvh] w-full overflow-hidden border-t border-onlan-lime/25 md:min-h-dvh"
             style={{
                 zIndex: 10 + index,
                 backgroundColor: PANEL_BG,
@@ -73,7 +73,7 @@ export function HowItWork(props: HowItWorkProps) {
                 <div className="absolute inset-0 bg-gradient-to-br from-[#2D368B]/93 from-[8%] via-[#2D368B]/72 via-[42%] to-[#1a2058]/82" />
             </div>
 
-            <div className="relative z-[1] flex min-h-dvh w-full flex-col justify-center">
+            <div className="relative z-[1] flex min-h-[85dvh] w-full flex-col justify-center md:min-h-dvh">
                 <div className="container mx-auto flex w-full flex-col gap-8 px-4 pb-12 pt-4 sm:pb-14 md:gap-10">
                     <div className="flex flex-col gap-10 md:flex-row md:items-center md:justify-between md:gap-12 lg:gap-16">
                         <div
@@ -93,7 +93,7 @@ export function HowItWork(props: HowItWorkProps) {
 
 
                             <div
-                                className="mt-2 select-none bg-gradient-to-b from-white via-onlan-lavender/90 to-white/20 bg-clip-text font-extrabold leading-[0.9] text-transparent [font-size:clamp(7rem,22vw,12rem)] md:mt-0 md:text-[11rem]"
+                                className="mt-2 select-none bg-gradient-to-b from-white via-onlan-lavender/90 to-white/20 bg-clip-text font-extrabold leading-[0.9] text-transparent [font-size:clamp(4rem,18vw,8rem)] md:mt-0 lg:text-[11rem]"
                                 aria-hidden
                             >
                                 {number}
