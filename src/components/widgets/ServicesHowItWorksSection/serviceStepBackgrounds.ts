@@ -6,12 +6,12 @@
  */
 import type { HowItWorksServiceItem } from '@/types/HowItWorks.interface';
 
-import imgAir from '@images/Avia.jpg';
-import imgSea from '@images/Morski.jpg';
-import imgRoad from '@images/MultiModals.jpg';
-import imgCustoms from '@images/Mytne.jpg';
-import imgOversized from '@images/Negabarutni.jpg';
-import imgRail from '@images/Zaliznuchni.jpg';
+import imgAir from '@images/Avia.webp';
+import imgSea from '@images/Morski.webp';
+import imgRoad from '@images/MultiModals.webp';
+import imgCustoms from '@images/Mytne.webp';
+import imgOversized from '@images/Negabarutni.webp';
+import imgRail from '@images/Zaliznuchni.webp';
 
 export const SERVICE_STEP_BACKGROUND_BY_SLUG: Record<HowItWorksServiceItem['slug'], string> = {
     automotive: imgRoad,

@@ -2,7 +2,7 @@ import TruckIcon from '@/assets/icons/Truck.svg';
 import PlaneIcon from '@/assets/icons/Plane.svg';
 import ShipIcon from '@/assets/icons/Ship.svg';
 import ButtonArrowRightIcon from '@/assets/icons/ButtonArrow.svg';
-import heroPhoto from '@/assets/images/AboutUsHero.png';
+import heroPhoto from '@/assets/images/AboutUsHero.webp';
 import Image from 'next/image';
 import { Elements } from '@/components/elements';
 import Description from '@/components/elements/Description';

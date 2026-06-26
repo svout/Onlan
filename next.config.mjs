@@ -1,27 +1,10 @@
 import path from 'node:path';
 
 const isStaticExportBuild = process.env.NEXT_EXPORT === 'true';
-const SHOP_PLANS_ZIP_FALLBACK_PATH = '/shop-individual-health-insurance-plans/zip/__dynamic__';
-const SHOP_PLANS_ZIP_QUERY_PARAM = '__zip';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    ...(isStaticExportBuild
-        ? { output: 'export' }
-        : {
-              async rewrites() {
-                  return [
-                      {
-                          source: '/shop-individual-health-insurance-plans/zip/:zip/',
-                          destination: `${SHOP_PLANS_ZIP_FALLBACK_PATH}?${SHOP_PLANS_ZIP_QUERY_PARAM}=:zip`,
-                      },
-                      {
-                          source: '/shop-individual-health-insurance-plans/zip/:zip',
-                          destination: `${SHOP_PLANS_ZIP_FALLBACK_PATH}?${SHOP_PLANS_ZIP_QUERY_PARAM}=:zip`,
-                      },
-                  ];
-              },
-          }),
+    ...(isStaticExportBuild ? { output: 'export' } : {}),
     // Generate canonical app routes without a trailing slash, e.g. `/terms` instead of `/terms/`
     trailingSlash: false,
     productionBrowserSourceMaps: true,

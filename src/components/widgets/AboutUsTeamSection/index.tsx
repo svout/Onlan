@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 import { FaLinkedinIn } from 'react-icons/fa6';
-import girlPhoto from '@/assets/images/girl.jpg';
-import menPhoto from '@/assets/images/men.jpg';
+import girlPhoto from '@/assets/images/girl.webp';
+import menPhoto from '@/assets/images/men.webp';
 import { Elements } from '@/components/elements';
 import {
     ABOUT_US_TEAM,

@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { Link } from 'react-router';
-import heroImage from '@images/onlan-hero-logistics.png';
+import heroImage from '@images/onlan-hero-logistics.webp';
 import { HOME_HERO } from '@/content/homeHero';
 
 const iconClassName =

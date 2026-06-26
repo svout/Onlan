@@ -420,7 +420,6 @@
 
         &::-webkit-calendar-picker-indicator {
             @apply size-5 p-0.5 text-base-content outline-none;
-            background: url(../assets/icons/calendar.svg) no-repeat center;
         }
 
         &::-webkit-datetime-edit-fields-wrapper {

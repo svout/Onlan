@@ -1,8 +1,8 @@
-import imgContainers from '@images/aboutUsNew/containers.png';
-import imgOffice from '@images/aboutUsNew/office.png';
-import imgPlane from '@images/aboutUsNew/plane.png';
-import imgTruck from '@images/aboutUsNew/truck.png';
-import imgWarehouse from '@images/aboutUsNew/warehouse.png';
+import imgContainers from '@images/aboutUsNew/containers.webp';
+import imgOffice from '@images/aboutUsNew/office.webp';
+import imgPlane from '@images/aboutUsNew/plane.webp';
+import imgTruck from '@images/aboutUsNew/truck.webp';
+import imgWarehouse from '@images/aboutUsNew/warehouse.webp';
 
 export type AboutUsNewPhoto = {
     id: string;

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { Link } from 'react-router';
 import { Elements } from '@elements/index.ts';
-import WhyChooseUsImage from '@images/WhyChooseUs.jpg';
+import WhyChooseUsImage from '@images/WhyChooseUs.webp';
 import Title from '@/components/elements/Title';
 
 const reasons: { num: string; lines: string[] }[] = [

@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { ContactsHeroShape } from '@/assets/icons/ContactsHeroShape';
-import menPhoto from '@/assets/images/men.jpg';
+import menPhoto from '@/assets/images/men.webp';
 import { Elements } from '@/components/elements';
 import { CONTACTS_HERO } from '@/content/contacts';
 

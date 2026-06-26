@@ -19,7 +19,7 @@ const websiteJsonLd = createWebsiteJsonLd();
 
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
-        <html lang="en" className={`${EUkraine.variable} ${EUkraine.className}`}>
+        <html lang="uk" className={`${EUkraine.variable} ${EUkraine.className}`}>
             <body>
                 <Preloader />
                 <JsonLd data={organizationJsonLd} />

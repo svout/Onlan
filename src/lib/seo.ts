@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import type { ServiceContent } from '@/types/Service.interface';
 
-const FALLBACK_SITE_URL = 'https://onlan.com';
+const FALLBACK_SITE_URL = 'https://onlan.com.ua';
 const DEFAULT_SITE_DESCRIPTION =
-    'Експрес-логістика для бізнесу, що рухається швидко. Митниця за 24 години, повний контроль маршруту, нульові затримки.';
+    'Логістика для бізнесу, що рухається швидко. Митниця за 24 години, повний контроль маршруту, нульові затримки.';
 
 export const SITE_NAME = 'OnLan Logistic';
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? FALLBACK_SITE_URL;
@@ -36,9 +36,10 @@ export const NOT_FOUND_SEO: PageSeoConfig = {
 };
 
 export const ABOUT_US_SEO: PageSeoConfig = {
-    title: 'About Us',
-    description: 'About Us',
-    path: '/about',
+    title: 'Про нас | OnLan Logistic',
+    description:
+        'OnLan Logistic — надійний логістичний партнер для бізнесу. 10+ років досвіду в міжнародних, мультимодальних та авіаперевезеннях.',
+    path: '/about-us',
 };
 
 export const CONTACTS_SEO: PageSeoConfig = {
@@ -113,15 +114,21 @@ export function createRootMetadata(): Metadata {
         alternates: {
             canonical: '/',
         },
+        manifest: '/site.webmanifest',
         icons: {
-            icon: [{ url: FAVICON_PATH, type: 'image/png' }],
+            icon: [
+                { url: '/favicon.ico', sizes: 'any' },
+                { url: FAVICON_PATH, type: 'image/png' },
+                { url: '/favicon-96x96.png', type: 'image/png', sizes: '96x96' },
+            ],
+            apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
         },
         openGraph: {
             title: SITE_NAME,
             description: DEFAULT_SITE_DESCRIPTION,
             url: toAbsoluteUrl('/'),
             siteName: SITE_NAME,
-            locale: 'en_US',
+            locale: 'uk_UA',
             type: 'website',
             images: [
                 {
@@ -157,7 +164,7 @@ export function createPageMetadata(config: PageSeoConfig): Metadata {
             description: config.description,
             url: pageUrl,
             siteName: SITE_NAME,
-            locale: 'en_US',
+            locale: 'uk_UA',
             type: 'website',
             images: [
                 {

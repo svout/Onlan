@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { FaEnvelope, FaInstagram, FaLinkedinIn, FaPhone } from 'react-icons/fa6';
-import footerBackground from '@/assets/images/FooterBackground.png';
+import footerBackground from '@/assets/images/FooterBackground.webp';
 import Description from '@/components/elements/Description';
 import { LogoFooter } from '@/assets/icons/LogoFooter';
 

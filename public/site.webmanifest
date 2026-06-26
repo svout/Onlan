@@ -1,6 +1,8 @@
 {
-  "name": "Predictable Benefits",
-  "short_name": "Predictable Benefits",
+  "name": "OnLan Logistic",
+  "short_name": "OnLan",
+  "description": "Міжнародна логістика для бізнесу: авто, море, авіа, залізниця, митне оформлення.",
+  "lang": "uk",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -15,7 +17,8 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
+  "theme_color": "#2c358c",
   "background_color": "#ffffff",
-  "display": "standalone"
+  "display": "standalone",
+  "start_url": "/"
 }
