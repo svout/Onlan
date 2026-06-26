@@ -3,7 +3,9 @@
 ## Команды
 
 - `npm run dev` — локальная разработка
-- `npm run build` — production build + статический экспорт в `out/`
+- `npm run build` — production build (`.next/`, for `next start`)
+- `npm run build:static` — static export to `out/` (used for cPanel deployment)
+- `npm run export` — alias for `build:static`
 - `npm run preview` — локальный просмотр статического `out/`
 - `npm run lint` — eslint
 
@@ -17,3 +19,12 @@
 - `app/` — маршруты Next.js
 - `src/` — UI-компоненты и бизнес-логика
 - `public/` — статические ассеты
+
+## Деплой на cPanel (Git)
+
+1. У файле `.cpanel.yml` замените `USERNAME` на имя вашего cPanel-аккаунта в `DEPLOYPATH` (обычно `/home/ваш_логин/public_html/`).
+2. Закоммитьте и запушьте `.cpanel.yml` в репозиторий, который подключён в cPanel.
+3. В cPanel → **Git Version Control** нажмите **Update from Remote**, затем **Deploy HEAD Commit**.
+4. Если появляется ошибка *«No uncommitted changes»* — на **сервере** в клоне репозитория не должно быть локальных правок. Сбросьте их (discard) или сделайте pull без изменений в рабочей копии на хостинге.
+
+Локально перед push: `git status` должен показывать *working tree clean*.

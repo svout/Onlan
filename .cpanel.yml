@@ -1,0 +1,20 @@
+---
+# cPanel Git deployment for OnLan (Next.js static export → public_html).
+#
+# BEFORE FIRST DEPLOY: replace USERNAME with your cPanel account name.
+# The path is usually shown in cPanel → Git Version Control → Deploy.
+#
+# Requirements on the server:
+# - Node.js 18+ (cPanel → Setup Node.js App or ea-nodejs in PATH)
+# - npm ci / npm run build:static must succeed in the repository root
+#
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/USERNAME/public_html/
+    - export NEXT_EXPORT=true
+    - export NODE_ENV=production
+    - export PATH=/opt/cpanel/ea-nodejs22/bin:/opt/cpanel/ea-nodejs20/bin:/opt/cpanel/ea-nodejs18/bin:$PATH
+    - /bin/mkdir -p $DEPLOYPATH
+    - npm ci
+    - npm run build:static
+    - /bin/cp -R out/. $DEPLOYPATH
